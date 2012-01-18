@@ -97,7 +97,7 @@ static KKPasscodeLock *sharedLock = nil;
   if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
     KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
     vc.mode = KKPasscodeModeEnter;
-    //vc.rootViewController = self;
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
       vc.modalPresentationStyle = UIModalPresentationFullScreen;
     }                

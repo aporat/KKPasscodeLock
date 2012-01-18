@@ -28,13 +28,27 @@ typedef NSUInteger KKPasscodeMode;
 
 
 @class KKPasscodeSettingsViewController;
+@class KKPasscodeViewController;
+
+@protocol KKPasscodeViewControllerDelegate <NSObject>
+
+@optional
+- (void)didPasscodeEnteredCorrectly:(KKPasscodeViewController*)viewController;
+
+- (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController;
+
+@end
+
+
 
 @interface KKPasscodeViewController : UIViewController <UITextFieldDelegate, 
                                                         UITableViewDelegate, 
                                                         UITableViewDataSource> {
   
-  KKPasscodeSettingsViewController* _passcodeLockViewController;
   
+  id<KKPasscodeViewControllerDelegate> _delegate;
+  
+  KKPasscodeSettingsViewController* _passcodeLockViewController;
   UILabel* _passcodeConfirmationWarningLabel;
   UIView* _failedAttemptsView;
   UILabel* _failedAttemptsLabel;
@@ -66,12 +80,10 @@ typedef NSUInteger KKPasscodeMode;
   CGFloat _viewWidth;
 }
 
-@property (nonatomic, assign) KKPasscodeMode mode;
 @property (nonatomic, retain) KKPasscodeSettingsViewController* passcodeLockViewController;
-
+@property (nonatomic, assign) id <KKPasscodeViewControllerDelegate> delegate; 
+@property (nonatomic, assign) KKPasscodeMode mode;
 
 
 @end
-
-
 

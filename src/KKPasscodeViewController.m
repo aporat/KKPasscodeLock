@@ -41,6 +41,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation KKPasscodeViewController
 
+@synthesize delegate = _delegate;
 @synthesize mode, passcodeLockViewController;
 
 
@@ -269,6 +270,12 @@
   
   _failedAttemptsLabel.hidden = NO;
   _failedAttemptsView.hidden = NO;
+  
+  if (_failedAttemptsCount == 10) {
+    if ([_delegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
+      [_delegate didPasscodeEnteredCorrectly:self];
+    }
+  }
   
   if (_failedAttemptsCount == 10 && _eraseData) {
     if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
@@ -649,19 +656,22 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
   return _simplePasscodeOn ? 0 : 1;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
   return 1;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
   
   static NSString *CellIdentifier = @"Cell";
   
@@ -691,7 +701,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
   if ([textField isEqual:[_textFields lastObject]]) {
     [self doneButtonPressed:nil];
   } else {
@@ -702,7 +713,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
   
   if (_simplePasscodeOn) {
     NSString *result = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -741,6 +753,10 @@
             
             [UIView commitAnimations];
           }
+          if ([_delegate respondsToSelector:@selector(didPasscodeEnteredCorrectly:)]) {
+            [_delegate performSelector:@selector(didPasscodeEnteredCorrectly:) withObject:self];
+          }
+          
           [self dismissModalViewControllerAnimated:YES];
         } else { 
           [self incrementAndShowFailedAttemptsLabel];

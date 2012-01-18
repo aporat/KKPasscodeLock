@@ -16,9 +16,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KKPasscodeViewController.h"
 
-
-@interface RootViewController : UIViewController  {
+@interface RootViewController : UIViewController <KKPasscodeViewControllerDelegate>  {
 
 }
 
