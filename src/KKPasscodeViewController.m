@@ -18,6 +18,7 @@
 #import "KKPasscodeViewController.h"
 #import "KKKeychain.h"
 #import "KKPasscodeSettingsViewController.h"
+#import "KKPasscodeLock.h"
 #import <QuartzCore/QuartzCore.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +95,7 @@
   [super viewDidLoad];  
   
   _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
-  _eraseData = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
+  _eraseData = [[KKPasscodeLock sharedLock] eraseOption] && [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     _viewWidth = 540.0f;
@@ -238,7 +239,7 @@
   _failedAttemptsLabel.hidden = NO;
   _failedAttemptsView.hidden = NO;
   
-  if (_failedAttemptsCount == 10) {
+  if (_failedAttemptsCount == [[KKPasscodeLock sharedLock] attemptsAllowed]) {
     
     _enterPasscodeTextField.delegate = nil;
     

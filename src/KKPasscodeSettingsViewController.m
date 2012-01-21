@@ -19,6 +19,7 @@
 #import "KKKeychain.h"
 #import "KKPasscodeViewController.h"
 #import "SettingsViewController.h"
+#import "KKPasscodeLock.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,7 +88,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)eraseDataSwitchChanged:(id)sender {
   if (_eraseDataSwitch.on) {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"All data in this app will be erased after 10 failed passcode attempts." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Enable" otherButtonTitles:nil];
+    NSString* title = [NSString stringWithFormat:@"All data in this app will be erased after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Enable" otherButtonTitles:nil];
     [sheet showInView:self.view];
     [sheet release];
   } else {
@@ -107,7 +110,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 3;
+  if ([[KKPasscodeLock sharedLock] eraseOption]) {
+    return 3;
+  }
+  
+  return 2;
 }
 
 
@@ -122,7 +129,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
   if (section == 2) {
-    return @"Erase all data in this app after 10 failed passcode attempts.";
+    return [NSString stringWithFormat:@"Erase all data in this app after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];;
   } else {
     return @"";
   }
