@@ -66,7 +66,7 @@
     _setPasscodeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _setPasscodeTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:_setPasscodeTableView];
-
+    
     _confirmPasscodeTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _confirmPasscodeTableView.delegate = self;
     _confirmPasscodeTableView.dataSource = self;
@@ -157,7 +157,7 @@
     tableView.frame = CGRectMake(tableView.frame.origin.x + _viewWidth, tableView.frame.origin.y, tableView.frame.size.width, tableView.frame.size.height);
     [self.view addSubview:tableView];
   }
-
+  
   
   [[_textFields objectAtIndex:0] becomeFirstResponder];
   [[_tableViews objectAtIndex:0] reloadData];
@@ -233,27 +233,26 @@
   _failedAttemptsView.hidden = NO;
   
   if (_failedAttemptsCount == 10) {
-    if ([_delegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
-      [_delegate didPasscodeEnteredCorrectly:self];
-    }
-  }
-  
-  if (_failedAttemptsCount == 10 && _eraseData) {
-    if ([KKKeychain setString:@"NO" forKey:@"passcode_on"]) {
-      [KKKeychain setString:@"" forKey:@"passcode"];
-    }        
-    [self dismissModalViewControllerAnimated:YES];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [UIView beginAnimations:@"fadeIn" context:nil];
-      [UIView setAnimationDelay:0.25];
-      [UIView setAnimationDuration:0.5];
-
-      [UIView commitAnimations];
-    }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times. All account data in this app has been deleted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    _enterPasscodeTextField.delegate = nil;
+    
+    if (_eraseData) {
+      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [UIView beginAnimations:@"fadeIn" context:nil];
+        [UIView setAnimationDelay:0.25];
+        [UIView setAnimationDuration:0.5];
+        
+        [UIView commitAnimations];
+      }
+            
+      if ([_delegate respondsToSelector:@selector(shouldEraseApplicationData:)]) {
+        [_delegate shouldEraseApplicationData:self];
+      }
+    } else {
+      if ([_delegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
+        [_delegate didPasscodeEnteredIncorrectly:self];
+      }
+    }
   }
   
 }
@@ -276,7 +275,7 @@
   oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - _viewWidth, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
   newTableView.frame = self.view.frame;
   [UIView commitAnimations];
-
+  
   
   [[_textFields objectAtIndex:_tableIndex - 1] resignFirstResponder];
   [[_textFields objectAtIndex:_tableIndex] becomeFirstResponder];
@@ -301,7 +300,7 @@
   newTableView.frame = self.view.frame;
   [UIView commitAnimations];
   
-
+  
   
   [[_textFields objectAtIndex:_tableIndex + 1] resignFirstResponder];
   [[_textFields objectAtIndex:_tableIndex] becomeFirstResponder];
@@ -348,7 +347,7 @@
       } else if ([textField isEqual:_setPasscodeTextField]) {
         if ([passcode isEqualToString:_setPasscodeTextField.text]) {
           _setPasscodeTextField.text = @"";
-          _passcodeConfirmationWarningLabel.text = @"Enter a different passcode. Cannot re-use the same passcode.";
+          _passcodeConfirmationWarningLabel.text = @"Enter a different passcode. You cannot re-use the same passcode.";
           _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 131.5, _viewWidth, 60.0);
         } else {
           _passcodeConfirmationWarningLabel.text = @"";
@@ -391,7 +390,7 @@
         [UIView beginAnimations:@"fadeIn" context:nil];
         [UIView setAnimationDelay:0.25];
         [UIView setAnimationDuration:0.5];
-
+        
         [UIView commitAnimations];
       }
       [self dismissModalViewControllerAnimated:YES];
@@ -479,7 +478,7 @@
 {
   
   textField.keyboardType = UIKeyboardTypeNumberPad;
-    
+  
   textField.hidden = YES;
   [self.view addSubview:textField];
   
