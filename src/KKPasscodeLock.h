@@ -26,7 +26,4 @@
 
 - (void)setDefaultSettings;
 
-- (void)showPasscodeController:(UINavigationController*)navController 
-                  withDelegate:(id<KKPasscodeViewControllerDelegate>)delegate;
-
 @end
