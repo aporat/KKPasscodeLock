@@ -55,13 +55,6 @@
     vc.mode = KKPasscodeModeEnter;
     vc.delegate = self;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      vc.modalPresentationStyle = UIModalPresentationFullScreen;
-      for (UIViewController *svc in _navigationController.viewControllers) {
-        svc.view.alpha = 0.0;
-      }
-    }
-    
     dispatch_async(dispatch_get_main_queue(),^ {
       UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
       

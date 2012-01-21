@@ -190,8 +190,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == 0) {
-    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil 
-                                                                              bundle:nil];
+    KKPasscodeViewController *vc = [[[KKPasscodeViewController alloc] initWithNibName:nil 
+                                                                               bundle:nil] autorelease];
     vc.delegate = self;
     
     if (_passcodeLockOn) {
@@ -199,11 +199,8 @@
     } else {
       vc.mode = KKPasscodeModeSet;
     }
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      vc.modalPresentationStyle = UIModalPresentationFormSheet;
-    }                
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -218,20 +215,15 @@
     }
     
     [self.navigationController presentModalViewController:nav animated:YES];
-    [nav release];
     
     
-    [vc release];
   } else if (indexPath.section == 1 && _passcodeLockOn) {
-    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
+    KKPasscodeViewController *vc = [[[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     vc.delegate = self;
     
-    vc.mode = KKPasscodeModeChange;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      vc.modalPresentationStyle = UIModalPresentationFormSheet;
-    }                
+    vc.mode = KKPasscodeModeChange;             
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -245,23 +237,25 @@
       nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;    
     }
     
-    [self.navigationController presentModalViewController:nav animated:YES];
-    [nav release];
-    
-    [vc release];
+    [self.navigationController presentModalViewController:nav animated:YES];    
   }
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController {
-  [self.tableView reloadData];
+  _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
+  _eraseDataOn = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
+  _eraseDataSwitch.on = _eraseDataOn;
 
-  if ([_delegate respondsToSelector:@selector(didSettingsChanged::)]) {
+  [self.tableView reloadData];
+  
+  if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
     [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
   }
   
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -53,6 +53,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   if (self == [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    self.modalPresentationStyle = UIModalPresentationFormSheet;
+    
     _enterPasscodeTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _enterPasscodeTableView.delegate = self;
     _enterPasscodeTableView.dataSource = self;
@@ -200,6 +202,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)cancelButtonPressed:(id)sender
 {
+  if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+    [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+  }
+  
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -308,7 +314,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)nextButtonPressed:(id)sender
+- (void)nextDigitPressed
 {
   
   UITextField *textField = [_textFields objectAtIndex:_tableIndex];
@@ -378,7 +384,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)doneButtonPressed:(id)sender
+- (void)doneButtonPressed
 {
   
   UITextField *textField = [_textFields objectAtIndex:_tableIndex];
@@ -393,6 +399,11 @@
         
         [UIView commitAnimations];
       }
+
+      if ([_delegate respondsToSelector:@selector(didPasscodeEnteredCorrectly::)]) {
+        [_delegate didPasscodeEnteredCorrectly:self];
+      }
+
       [self dismissModalViewControllerAnimated:YES];
     } else { 
       [self incrementAndShowFailedAttemptsLabel];
@@ -665,9 +676,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
   if ([textField isEqual:[_textFields lastObject]]) {
-    [self doneButtonPressed:nil];
+    [self doneButtonPressed];
   } else {
-    [self nextButtonPressed:nil];
+    [self nextDigitPressed];
   }
   return NO;
 }

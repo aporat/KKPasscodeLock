@@ -81,10 +81,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0) {
-    KKPasscodeSettingsViewController *vc = [[KKPasscodeSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    KKPasscodeSettingsViewController *vc = [[[KKPasscodeSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
   } 
+}
+
+- (void)didSettingsChanged:(KKPasscodeSettingsViewController*)viewController
+{
+  [self.tableView reloadData];
 }
 
 @end
