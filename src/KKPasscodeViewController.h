@@ -74,7 +74,6 @@ typedef NSUInteger KKPasscodeMode;
   
   KKPasscodeMode _mode;
   
-  BOOL _simplePasscodeOn;
   BOOL _passcodeLockOn;
   BOOL _eraseData;
   

@@ -41,11 +41,8 @@
   RootViewController* vc = [[[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil] autorelease];
   
   _navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-  [self.window addSubview:_navigationController.view];
-  
-  
+  [self.window addSubview:_navigationController.view];  
   [self.window makeKeyAndVisible];
-  
   
   return YES;
 }

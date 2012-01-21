@@ -41,53 +41,22 @@ static KKPasscodeLock *sharedLock = nil;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)setDefaultSettings
-{
-  if (![KKKeychain getStringForKey:@"passcode_lock_passcode_on"]) {
-    [KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"];
-  }
-  
-  if (![KKKeychain getStringForKey:@"passcode_lock_simple_passcode_on"]) {
-    [KKKeychain setString:@"YES" forKey:@"passcode_lock_simple_passcode_on"];
-  }
-  
-  if (![KKKeychain getStringForKey:@"passcode_lock_erase_data_on"]) {
-    [KKKeychain setString:@"NO" forKey:@"passcode_lock_erase_data_on"];
-  }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)isPasscodeRequired
 {
-  return [[KKKeychain getStringForKey:@"passcode_lock_passcode_on"] isEqualToString:@"YES"];
+  return [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)presentAndRelease:(NSTimer *)timer
+- (void)setDefaultSettings
 {
-  UIViewController *vc = [timer.userInfo objectForKey:@"vc"];
-  UINavigationController *navController = [timer.userInfo objectForKey:@"nav"];
-  
-  UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-  
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    nav.navigationBar.barStyle = UIBarStyleBlack;
-    nav.navigationBar.opaque = NO;
-  } else {
-    nav.navigationBar.tintColor = navController.navigationBar.tintColor;
-    nav.navigationBar.translucent = navController.navigationBar.translucent;
-    nav.navigationBar.opaque = navController.navigationBar.opaque;
-    nav.navigationBar.barStyle = navController.navigationBar.barStyle;    
+  if (![KKKeychain getStringForKey:@"passcode_on"]) {
+    [KKKeychain setString:@"NO" forKey:@"passcode_on"];
   }
   
-  [navController presentModalViewController:nav animated:YES];
-  [nav release];
-  
-  
-  [vc release];
+  if (![KKKeychain getStringForKey:@"erase_data_on"]) {
+    [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
+  }
 }
 
 
@@ -97,25 +66,15 @@ static KKPasscodeLock *sharedLock = nil;
   if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
     KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
     vc.mode = KKPasscodeModeEnter;
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      vc.modalPresentationStyle = UIModalPresentationFullScreen;
-    }                
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      vc.modalPresentationStyle = UIModalPresentationFullScreen;
       for (UIViewController *svc in navController.viewControllers) {
         svc.view.alpha = 0.0;
       }
-      
-      NSDictionary* userinfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"vc", vc, 
-                                @"nav", navController, nil];
-      
-      [NSTimer scheduledTimerWithTimeInterval:0.3 target:self 
-                                     selector:@selector(presentAndRelease:) userInfo:
-       userinfo repeats:NO];
-      
-    } else {
+    }
+    
+    dispatch_async(dispatch_get_main_queue(),^ {
       UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
       
       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -129,10 +88,12 @@ static KKPasscodeLock *sharedLock = nil;
         nav.navigationBar.barStyle = navController.navigationBar.barStyle;    
       }
       
-      [navController presentModalViewController:nav animated:NO];
+      [navController presentModalViewController:nav animated:YES];
       [nav release];
+      
       [vc release];
-    }
+    });
+    
   }
 }
 

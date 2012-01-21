@@ -28,8 +28,6 @@
 - (UITextField*)allocAndInitPasscodeTextField;
 - (NSArray*)squares;
 - (UIView*)passwordHeaderViewForTextField:(UITextField*)textField;
-- (void)addNextButton;
-- (void)addDoneButton;
 - (void)moveToNextTableView;
 - (void)moveToPreviousTableView;
 
@@ -93,9 +91,8 @@
 {
   [super viewDidLoad];  
   
-  _simplePasscodeOn = [[KKKeychain getStringForKey:@"passcode_lock_simple_passcode_on"] isEqualToString:@"YES"];
-  _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_lock_passcode_on"] isEqualToString:@"YES"];
-  _eraseData = [[KKKeychain getStringForKey:@"passcode_lock_erase_data_on"] isEqualToString:@"YES"];
+  _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
+  _eraseData = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     _viewWidth = 540.0f;
@@ -122,41 +119,33 @@
       _enterPasscodeTableView.tableHeaderView = [self passwordHeaderViewForTextField:_enterPasscodeTextField];
       [_tableViews addObject:_enterPasscodeTableView];
       [_textFields addObject:_enterPasscodeTextField];
-      if (_simplePasscodeOn) {
-        [_squares addObject:[self squares]];
-        for (int i = 0; i < [[_squares lastObject] count]; i++) {
-          [_enterPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
-        }
+      [_squares addObject:[self squares]];
+      for (int i = 0; i < [[_squares lastObject] count]; i++) {
+        [_enterPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
       }
     }
     
     _setPasscodeTableView.tableHeaderView = [self passwordHeaderViewForTextField:_setPasscodeTextField];
     [_tableViews addObject:_setPasscodeTableView];
     [_textFields addObject:_setPasscodeTextField];
-    if (_simplePasscodeOn) {
-      [_squares addObject:[self squares]];
-      for (int i = 0; i < [[_squares lastObject] count]; i++) {
-        [_setPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
-      }
+    [_squares addObject:[self squares]];
+    for (int i = 0; i < [[_squares lastObject] count]; i++) {
+      [_setPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
     }
     _confirmPasscodeTableView.tableHeaderView = [self passwordHeaderViewForTextField:_confirmPasscodeTextField];
     [_tableViews addObject:_confirmPasscodeTableView];
     [_textFields addObject:_confirmPasscodeTextField];
-    if (_simplePasscodeOn) {
-      [_squares addObject:[self squares]];
-      for (int i = 0; i < [[_squares lastObject] count]; i++) {
-        [_confirmPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
-      }
+    [_squares addObject:[self squares]];
+    for (int i = 0; i < [[_squares lastObject] count]; i++) {
+      [_confirmPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
     }
   } else {        
     _enterPasscodeTableView.tableHeaderView = [self passwordHeaderViewForTextField:_enterPasscodeTextField];
     [_tableViews addObject:_enterPasscodeTableView];
     [_textFields addObject:_enterPasscodeTextField];
-    if (_simplePasscodeOn) {
-      [_squares addObject:[self squares]];
-      for (int i = 0; i < [[_squares lastObject] count]; i++) {
-        [_enterPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
-      }
+    [_squares addObject:[self squares]];
+    for (int i = 0; i < [[_squares lastObject] count]; i++) {
+      [_enterPasscodeTableView.tableHeaderView addSubview:[[_squares lastObject] objectAtIndex:i]];
     }
   }
   
@@ -168,12 +157,7 @@
     tableView.frame = CGRectMake(tableView.frame.origin.x + _viewWidth, tableView.frame.origin.y, tableView.frame.size.width, tableView.frame.size.height);
     [self.view addSubview:tableView];
   }
-  
-  if (_tableIndex == [_tableViews count] - 1) {
-    [self addDoneButton];
-  } else {
-    [self addNextButton];
-  }
+
   
   [[_textFields objectAtIndex:0] becomeFirstResponder];
   [[_tableViews objectAtIndex:0] reloadData];
@@ -200,9 +184,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITextField*)allocAndInitPasscodeTextField
 {
-  UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(29.0, 13.0, 271.0, 24.0)];
+  UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(29.0, 18.0, 271.0, 24.0)];
+  textField.font = [UIFont systemFontOfSize:14];
   textField.text = @"";
-  textField.textColor = [UIColor colorWithRed:0.220 green:0.329 blue:0.529 alpha:1.0];
+  textField.textColor = [UIColor blackColor];
   textField.secureTextEntry = YES;
   textField.delegate = self;
   
@@ -213,31 +198,9 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(void)cancelButtonPressed:(id)sender
+- (void)cancelButtonPressed:(id)sender
 {
 	[self dismissModalViewControllerAnimated:YES];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)addNextButton
-{
-  if (!_simplePasscodeOn) {
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(nextButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = nextButton;
-    [nextButton release];
-  }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)addDoneButton
-{
-  if (!_simplePasscodeOn) {
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
-  }
 }
 
 
@@ -245,11 +208,9 @@
 - (void)incrementAndShowFailedAttemptsLabel
 {
   _enterPasscodeTextField.text = @"";
-  if (_simplePasscodeOn) {
-    for (int i = 0; i < 4; i++) {
-      [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
-    }    
-  }
+  for (int i = 0; i < 4; i++) {
+    [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
+  }    
   
   _failedAttemptsCount += 1;
   if (_failedAttemptsCount == 1) {
@@ -278,8 +239,8 @@
   }
   
   if (_failedAttemptsCount == 10 && _eraseData) {
-    if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
-      [KKKeychain setString:@"" forKey:@"passcode_lock_passcode"];
+    if ([KKKeychain setString:@"NO" forKey:@"passcode_on"]) {
+      [KKKeychain setString:@"" forKey:@"passcode"];
     }        
     [self dismissModalViewControllerAnimated:YES];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -306,10 +267,8 @@
   UITableView *newTableView = [_tableViews objectAtIndex:_tableIndex];
   newTableView.frame = CGRectMake(oldTableView.frame.origin.x + _viewWidth, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
   
-  if (_simplePasscodeOn) {
-    for (int i = 0; i < 4; i++) {
-      [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
-    }    
+  for (int i = 0; i < 4; i++) {
+    [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
   }
   
   [UIView beginAnimations:@"" context:nil];
@@ -317,12 +276,7 @@
   oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - _viewWidth, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
   newTableView.frame = self.view.frame;
   [UIView commitAnimations];
-  
-  if (_tableIndex == [_tableViews count] - 1) {
-    [self addDoneButton];
-  } else {
-    [self addNextButton];
-  }
+
   
   [[_textFields objectAtIndex:_tableIndex - 1] resignFirstResponder];
   [[_textFields objectAtIndex:_tableIndex] becomeFirstResponder];
@@ -337,10 +291,8 @@
   UITableView *newTableView = [_tableViews objectAtIndex:_tableIndex];
   newTableView.frame = CGRectMake(oldTableView.frame.origin.x - _viewWidth, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
   
-  if (_simplePasscodeOn) {
-    for (int i = 0; i < 4; i++) {
-      [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
-    }    
+  for (int i = 0; i < 4; i++) {
+    [[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"passcode_square_empty.png"]];
   }
   
   [UIView beginAnimations:@"" context:nil];
@@ -349,11 +301,7 @@
   newTableView.frame = self.view.frame;
   [UIView commitAnimations];
   
-  if (_tableIndex == [_tableViews count] - 1) {
-    [self addDoneButton];
-  } else {
-    [self addNextButton];
-  }
+
   
   [[_textFields objectAtIndex:_tableIndex + 1] resignFirstResponder];
   [[_textFields objectAtIndex:_tableIndex] becomeFirstResponder];
@@ -378,8 +326,8 @@
           _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
           [self moveToPreviousTableView];
         } else {
-          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-            [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+            [KKKeychain setString:@"YES" forKey:@"passcode_on"];
           }
           
           if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -390,7 +338,7 @@
         }
       }            
     } else if (mode == KKPasscodeModeChange) {
-      NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+      NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
       if ([textField isEqual:_enterPasscodeTextField]) {
         if ([passcode isEqualToString:_enterPasscodeTextField.text]) {
           [self moveToNextTableView];
@@ -414,8 +362,8 @@
           _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
           [self moveToPreviousTableView];
         } else {
-          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-            [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+            [KKKeychain setString:@"YES" forKey:@"passcode_on"];
           }
           
           if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -437,7 +385,7 @@
   UITextField *textField = [_textFields objectAtIndex:_tableIndex];
   
   if (mode == KKPasscodeModeEnter) {
-    NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+    NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
     if ([_enterPasscodeTextField.text isEqualToString:passcode]) {
       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [UIView beginAnimations:@"fadeIn" context:nil];
@@ -460,8 +408,8 @@
         _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
         [self moveToPreviousTableView];
       } else {
-        if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-          [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+        if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+          [KKKeychain setString:@"YES" forKey:@"passcode_on"];
         }
         
         if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -472,7 +420,7 @@
       }
     }            
   } else if (mode == KKPasscodeModeChange) {
-    NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+    NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
     if ([textField isEqual:_enterPasscodeTextField]) {
       if ([passcode isEqualToString:_enterPasscodeTextField.text]) {
         [self moveToNextTableView];
@@ -496,8 +444,8 @@
         _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
         [self moveToPreviousTableView];
       } else {
-        if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-          [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+        if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+          [KKKeychain setString:@"YES" forKey:@"passcode_on"];
         }
         
         if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -508,10 +456,10 @@
       }
     }
   } else if (mode == KKPasscodeModeDisabled) {
-    NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+    NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
     if ([_enterPasscodeTextField.text isEqualToString:passcode]) {
-      if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
-        [KKKeychain setString:@"" forKey:@"passcode_lock_passcode"];
+      if ([KKKeychain setString:@"NO" forKey:@"passcode_on"]) {
+        [KKKeychain setString:@"" forKey:@"passcode"];
       }
       
       if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -530,15 +478,10 @@
 - (UIView*)passwordHeaderViewForTextField:(UITextField*)textField
 {
   
-  if (_simplePasscodeOn) {
-    textField.keyboardType = UIKeyboardTypeNumberPad;
+  textField.keyboardType = UIKeyboardTypeNumberPad;
     
-    textField.hidden = YES;
-    [self.view addSubview:textField];
-  } else {
-    textField.keyboardType = UIKeyboardTypeDefault;
-    textField.returnKeyType = UIReturnKeyNext;
-  }
+  textField.hidden = YES;
+  [self.view addSubview:textField];
   
   UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _viewWidth, 70.0)] autorelease];
   UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 27.5, _viewWidth, 30.0)];
@@ -678,7 +621,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return _simplePasscodeOn ? 0 : 1;
+  return 0;
 }
 
 
@@ -701,7 +644,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   
-  //cell.accessoryView = enterPasscodeTextField; //[textFields objectAtIndex:tableIndex];
   if ([aTableView isEqual:_enterPasscodeTableView]) {
     cell.accessoryView = _enterPasscodeTextField;
   } else if ([aTableView isEqual:_setPasscodeTableView]) {
@@ -736,7 +678,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
   
-  if (_simplePasscodeOn) {
+  if (YES) {
     NSString *result = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     textField.text = result;
@@ -753,10 +695,10 @@
     if ([result length] == 4) {
       
       if (mode == KKPasscodeModeDisabled) {
-        NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+        NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
         if ([_enterPasscodeTextField.text isEqualToString:passcode]) {
-          if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
-            [KKKeychain setString:@"" forKey:@"passcode_lock_passcode"];
+          if ([KKKeychain setString:@"NO" forKey:@"passcode_on"]) {
+            [KKKeychain setString:@"" forKey:@"passcode"];
           }
           
           if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -768,7 +710,7 @@
           [self incrementAndShowFailedAttemptsLabel];
         }
       } else if (mode == KKPasscodeModeEnter) {
-        NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+        NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
         if ([_enterPasscodeTextField.text isEqualToString:passcode]) {
           if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             [UIView beginAnimations:@"fadeIn" context:nil];
@@ -786,7 +728,7 @@
           [self incrementAndShowFailedAttemptsLabel];
         }
       } else if (mode == KKPasscodeModeChange) {
-        NSString *passcode = [KKKeychain getStringForKey:@"passcode_lock_passcode"];
+        NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
         if ([textField isEqual:_enterPasscodeTextField]) {
           if ([passcode isEqualToString:_enterPasscodeTextField.text]) {
             [self moveToNextTableView];
@@ -813,8 +755,8 @@
             _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
             [self moveToPreviousTableView];
           } else {
-            if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-              [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+            if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+              [KKKeychain setString:@"YES" forKey:@"passcode_on"];
             }
             
             if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
@@ -833,8 +775,8 @@
           _passcodeConfirmationWarningLabel.text = @"Passcodes did not match. Try again.";
           [self moveToPreviousTableView];
         } else {
-          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
-            [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
+          if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
+            [KKKeychain setString:@"YES" forKey:@"passcode_on"];
           }
           
           if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {

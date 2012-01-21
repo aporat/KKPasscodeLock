@@ -41,10 +41,7 @@
 {
   [super viewDidLoad];
   self.navigationItem.title = @"Passcode Lock";
-  
-  _simplePasscodeSwitch = [[UISwitch alloc] init];
-  [_simplePasscodeSwitch addTarget:self action:@selector(simplePasscodeSwitchChanged:) forControlEvents:UIControlEventValueChanged];
-  
+    
   _eraseDataSwitch = [[UISwitch alloc] init];
   [_eraseDataSwitch addTarget:self action:@selector(eraseDataSwitchChanged:) forControlEvents:UIControlEventValueChanged];
 }
@@ -54,10 +51,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_lock_passcode_on"] isEqualToString:@"YES"];
-  _simplePasscodeOn = [[KKKeychain getStringForKey:@"passcode_lock_simple_passcode_on"] isEqualToString:@"YES"];
-  _eraseDataOn = [[KKKeychain getStringForKey:@"passcode_lock_erase_data_on"] isEqualToString:@"YES"];
-  _simplePasscodeSwitch.on = _simplePasscodeOn;
+  _passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
+  _eraseDataOn = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
   _eraseDataSwitch.on = _eraseDataOn;
 }
 
@@ -72,23 +67,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
-#pragma mark UISwitch
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)simplePasscodeSwitchChanged:(id)sender
-{
-  _simplePasscodeOn = _simplePasscodeSwitch.on;
-  if (_simplePasscodeOn) {
-    [KKKeychain setString:@"YES" forKey:@"passcode_lock_simple_passcode_on"];
-  } else {
-    [KKKeychain setString:@"NO" forKey:@"passcode_lock_simple_passcode_on"];
-  }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark -
 #pragma mark UIActionSheetDelegate
 
 
@@ -97,10 +75,10 @@
 {
   if (buttonIndex == 0) {
     _eraseDataOn = YES;
-    [KKKeychain setString:@"YES" forKey:@"passcode_lock_erase_data_on"];
+    [KKKeychain setString:@"YES" forKey:@"erase_data_on"];
   } else {
     _eraseDataOn = NO;
-    [KKKeychain setString:@"NO" forKey:@"passcode_lock_erase_data_on"];
+    [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
   }
   [_eraseDataSwitch setOn:_eraseDataOn animated:YES];
 }
@@ -114,7 +92,7 @@
     [sheet release];
   } else {
     _eraseDataOn = NO;
-    [KKKeychain setString:@"NO" forKey:@"passcode_lock_erase_data_on"];
+    [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
   }    
 }
 
@@ -129,7 +107,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 4;
+  return 3;
 }
 
 
@@ -144,8 +122,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
   if (section == 2) {
-    return @"A simple passcode is a 4 digit number.";
-  } else if (section == 3) {
     return @"Erase all data in this app after 10 failed passcode attempts.";
   } else {
     return @"";
@@ -187,19 +163,6 @@
     cell.textLabel.textAlignment = UITextAlignmentCenter;
     cell.accessoryView = nil;
   } else if (indexPath.section == 2) {
-    cell.textLabel.text = @"Simple Passcode";
-    cell.textLabel.textColor = [UIColor blackColor];
-    cell.textLabel.textAlignment = UITextAlignmentLeft;
-    cell.accessoryView = _simplePasscodeSwitch;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (_passcodeLockOn) {
-      cell.textLabel.textColor = [UIColor grayColor];
-      _simplePasscodeSwitch.enabled = NO;
-    } else {
-      cell.textLabel.textColor = [UIColor blackColor];
-      _simplePasscodeSwitch.enabled = YES;
-    }
-  } else if (indexPath.section == 3) {
     cell.textLabel.text = @"Erase Data";
     cell.textLabel.textAlignment = UITextAlignmentLeft;
     cell.accessoryView = _eraseDataSwitch;
@@ -260,7 +223,7 @@
     
     [vc release];
   } else if (indexPath.section == 1 && _passcodeLockOn) {
-    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:@"KKPasscodeViewController" bundle:nil];
+    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
     vc.delegate = self;
     
     vc.mode = KKPasscodeModeChange;
@@ -294,7 +257,6 @@
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController {
   [self.tableView reloadData];
 
-  NSLog(@"OKOKO");
   if ([_delegate respondsToSelector:@selector(didSettingsChanged::)]) {
     [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
   }
@@ -311,7 +273,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-  [_simplePasscodeSwitch release];
   [_eraseDataSwitch release];
 
   [super dealloc];

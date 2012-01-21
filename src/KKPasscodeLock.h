@@ -21,9 +21,10 @@
 
 + (KKPasscodeLock*)sharedLock;
 
+- (BOOL)isPasscodeRequired;
 
 - (void)setDefaultSettings;
-- (BOOL)isPasscodeRequired;
+
 - (void)showPasscodeController:(UINavigationController*)navController;
 
 @end
