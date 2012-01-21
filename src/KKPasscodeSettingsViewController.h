@@ -16,8 +16,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KKPasscodeViewController.h"
 
-@interface KKPasscodeSettingsViewController : UITableViewController <UIActionSheetDelegate> {
+@class KKPasscodeSettingsViewController;
+
+@protocol KKPasscodeSettingsViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)didSettingsChanged:(KKPasscodeSettingsViewController*)viewController;
+
+@end
+
+@interface KKPasscodeSettingsViewController : UITableViewController <UIActionSheetDelegate, KKPasscodeViewControllerDelegate> {
+  
+  id <KKPasscodeSettingsViewControllerDelegate> _delegate;
+  
   UISwitch* _simplePasscodeSwitch;
   UISwitch* _eraseDataSwitch;
   
@@ -25,5 +39,7 @@
   BOOL _simplePasscodeOn;
   BOOL _eraseDataOn;
 }
+
+@property (nonatomic, assign) id <KKPasscodeSettingsViewControllerDelegate> delegate;
 
 @end
