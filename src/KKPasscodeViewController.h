@@ -37,13 +37,15 @@ typedef NSUInteger KKPasscodeMode;
 
 - (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController;
 
+- (void)shouldEraseApplicationData:(KKPasscodeViewController*)viewController;
+
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController;
 
 @end
 
 
 
-@interface KKPasscodeViewController : UIViewController <UITextFieldDelegate, 
+@interface KKPasscodeViewController : UIViewController <UITextFieldDelegate,
                                                         UITableViewDelegate, 
                                                         UITableViewDataSource> {
   

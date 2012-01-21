@@ -16,8 +16,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KKPasscodeLock.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, KKPasscodeViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;

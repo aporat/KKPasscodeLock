@@ -50,7 +50,21 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-  [[KKPasscodeLock sharedLock] showPasscodeController:self.navigationController];
+  [[KKPasscodeLock sharedLock] showPasscodeController:self.navigationController withDelegate:self];
 }
+
+- (void)shouldEraseApplicationData:(KKPasscodeViewController*)viewController 
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times. All account data in this app has been deleted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+  [alert release];
+}
+
+- (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController 
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+  [alert release];}
+
 
 @end

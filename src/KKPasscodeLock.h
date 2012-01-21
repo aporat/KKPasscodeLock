@@ -16,6 +16,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KKPasscodeViewController.h"
 
 @interface KKPasscodeLock : NSObject
 
@@ -25,6 +26,7 @@
 
 - (void)setDefaultSettings;
 
-- (void)showPasscodeController:(UINavigationController*)navController;
+- (void)showPasscodeController:(UINavigationController*)navController 
+                  withDelegate:(id<KKPasscodeViewControllerDelegate>)delegate;
 
 @end
