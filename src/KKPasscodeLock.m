@@ -60,44 +60,5 @@ static KKPasscodeLock *sharedLock = nil;
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)showPasscodeController:(UINavigationController*)navController 
-                  withDelegate:(id<KKPasscodeViewControllerDelegate>)delegate
-{
-  if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
-    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
-    vc.mode = KKPasscodeModeEnter;
-    vc.delegate = delegate;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      vc.modalPresentationStyle = UIModalPresentationFullScreen;
-      for (UIViewController *svc in navController.viewControllers) {
-        svc.view.alpha = 0.0;
-      }
-    }
-    
-    dispatch_async(dispatch_get_main_queue(),^ {
-      UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-      
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        nav.modalPresentationStyle = UIModalPresentationFormSheet;
-        nav.navigationBar.barStyle = UIBarStyleBlack;
-        nav.navigationBar.opaque = NO;
-      } else {
-        nav.navigationBar.tintColor = navController.navigationBar.tintColor;
-        nav.navigationBar.translucent = navController.navigationBar.translucent;
-        nav.navigationBar.opaque = navController.navigationBar.opaque;
-        nav.navigationBar.barStyle = navController.navigationBar.barStyle;    
-      }
-      
-      [navController presentModalViewController:nav animated:YES];
-      [nav release];
-      
-      [vc release];
-    });
-    
-  }
-}
-
 
 @end
