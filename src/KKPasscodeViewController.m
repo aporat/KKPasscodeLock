@@ -42,7 +42,7 @@
 @implementation KKPasscodeViewController
 
 @synthesize delegate = _delegate;
-@synthesize mode, passcodeLockViewController;
+@synthesize mode;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -381,7 +381,11 @@
           if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
             [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
           }
-          [self.passcodeLockViewController.tableView reloadData];
+          
+          if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+            [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+          }
+          
           [self dismissModalViewControllerAnimated:YES];
         }
       }            
@@ -413,7 +417,11 @@
           if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
             [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
           }
-          [self.passcodeLockViewController.tableView reloadData];
+          
+          if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+            [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+          }
+          
           [self dismissModalViewControllerAnimated:YES];
         }
       }
@@ -455,7 +463,11 @@
         if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
           [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
         }
-        [self.passcodeLockViewController.tableView reloadData];
+        
+        if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+          [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+        }
+        
         [self dismissModalViewControllerAnimated:YES];
       }
     }            
@@ -487,7 +499,11 @@
         if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
           [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
         }
-        [self.passcodeLockViewController.tableView reloadData];
+        
+        if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+          [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+        }
+        
         [self dismissModalViewControllerAnimated:YES];
       }
     }
@@ -497,7 +513,11 @@
       if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
         [KKKeychain setString:@"" forKey:@"passcode_lock_passcode"];
       }
-      [self.passcodeLockViewController.tableView reloadData];
+      
+      if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+        [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+      }
+      
       [self dismissModalViewControllerAnimated:YES];
     } else { 
       [self incrementAndShowFailedAttemptsLabel];
@@ -738,7 +758,11 @@
           if ([KKKeychain setString:@"NO" forKey:@"passcode_lock_passcode_on"]) {
             [KKKeychain setString:@"" forKey:@"passcode_lock_passcode"];
           }
-          [self.passcodeLockViewController.tableView reloadData];
+          
+          if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+            [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+          }
+          
           [self dismissModalViewControllerAnimated:YES];
         } else { 
           [self incrementAndShowFailedAttemptsLabel];
@@ -792,7 +816,11 @@
             if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
               [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
             }
-            [self.passcodeLockViewController.tableView reloadData];
+            
+            if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+              [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+            }
+            
             [self dismissModalViewControllerAnimated:YES];
           }
         }
@@ -808,7 +836,11 @@
           if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode_lock_passcode"]) {
             [KKKeychain setString:@"YES" forKey:@"passcode_lock_passcode_on"];
           }
-          [self.passcodeLockViewController.tableView reloadData];
+          
+          if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
+            [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+          }
+          
           [self dismissModalViewControllerAnimated:YES];
         }
       }
@@ -836,7 +868,6 @@
   [_tableViews release];
   [_textFields release];
   [_squares release];
-  [_passcodeLockViewController release];
   
   [super dealloc];
 }

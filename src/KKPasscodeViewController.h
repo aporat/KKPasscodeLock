@@ -27,15 +27,17 @@ enum {
 typedef NSUInteger KKPasscodeMode;
 
 
-@class KKPasscodeSettingsViewController;
 @class KKPasscodeViewController;
 
 @protocol KKPasscodeViewControllerDelegate <NSObject>
 
 @optional
+
 - (void)didPasscodeEnteredCorrectly:(KKPasscodeViewController*)viewController;
 
 - (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController;
+
+- (void)didSettingsChanged:(KKPasscodeViewController*)viewController;
 
 @end
 
@@ -48,7 +50,6 @@ typedef NSUInteger KKPasscodeMode;
   
   id<KKPasscodeViewControllerDelegate> _delegate;
   
-  KKPasscodeSettingsViewController* _passcodeLockViewController;
   UILabel* _passcodeConfirmationWarningLabel;
   UIView* _failedAttemptsView;
   UILabel* _failedAttemptsLabel;
@@ -80,7 +81,6 @@ typedef NSUInteger KKPasscodeMode;
   CGFloat _viewWidth;
 }
 
-@property (nonatomic, retain) KKPasscodeSettingsViewController* passcodeLockViewController;
 @property (nonatomic, assign) id <KKPasscodeViewControllerDelegate> delegate; 
 @property (nonatomic, assign) KKPasscodeMode mode;
 

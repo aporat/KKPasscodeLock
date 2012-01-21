@@ -27,6 +27,8 @@
 @implementation KKPasscodeSettingsViewController
 
 
+@synthesize delegate = _delegate;
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,12 +229,13 @@
   if (indexPath.section == 0) {
     KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil 
                                                                               bundle:nil];
+    vc.delegate = self;
+    
     if (_passcodeLockOn) {
       vc.mode = KKPasscodeModeDisabled;
     } else {
       vc.mode = KKPasscodeModeSet;
     }
-    vc.passcodeLockViewController = self;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
       vc.modalPresentationStyle = UIModalPresentationFormSheet;
     }                
@@ -258,8 +261,9 @@
     [vc release];
   } else if (indexPath.section == 1 && _passcodeLockOn) {
     KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:@"KKPasscodeViewController" bundle:nil];
+    vc.delegate = self;
+    
     vc.mode = KKPasscodeModeChange;
-    vc.passcodeLockViewController = self;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
       vc.modalPresentationStyle = UIModalPresentationFormSheet;
     }                
@@ -285,6 +289,18 @@
   }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)didSettingsChanged:(KKPasscodeViewController*)viewController {
+  [self.tableView reloadData];
+
+  NSLog(@"OKOKO");
+  if ([_delegate respondsToSelector:@selector(didSettingsChanged::)]) {
+    [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
+  }
+  
+  
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
