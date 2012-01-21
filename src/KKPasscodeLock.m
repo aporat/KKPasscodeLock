@@ -28,12 +28,17 @@ static KKPasscodeLock *sharedLock = nil;
 @implementation KKPasscodeLock
 
 
+@synthesize eraseOption = _eraseOption;
+@synthesize attemptsAllowed = _attemptsAllowed;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 + (KKPasscodeLock*)sharedLock
 {
   @synchronized(self) {
     if (sharedLock == nil) {
       sharedLock = [[self alloc] init];
+      sharedLock.eraseOption = YES;
+      sharedLock.attemptsAllowed = 5;
     }
   }
   return sharedLock;
