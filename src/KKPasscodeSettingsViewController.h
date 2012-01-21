@@ -32,11 +32,9 @@
   
   id <KKPasscodeSettingsViewControllerDelegate> _delegate;
   
-  UISwitch* _simplePasscodeSwitch;
   UISwitch* _eraseDataSwitch;
   
   BOOL _passcodeLockOn;
-  BOOL _simplePasscodeOn;
   BOOL _eraseDataOn;
 }
 
