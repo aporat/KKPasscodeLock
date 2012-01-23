@@ -10,7 +10,7 @@ KKPasscodeLock is an iOS toolkit for adding a passcode view controller and passc
 
 
 <h2>Main Features in KKPasscodeLock</h2>
-- Either a simple 4 digit passcode (using a numeric keyboard) or a free-text passcode
+- Either a simple 4 digit passcode (using a numeric keyboard) or a free-text passcode (in development)
 - Supports universal apps (both iPhone and iPad)
 - Advanced passcode settings controller: set & change passcode, turn off/on passcode and passcode tries allowed
 - Passcode is saved securly in the device keychain
