@@ -19,17 +19,32 @@
 #import "KKPasscodeViewController.h"
 
 @interface KKPasscodeLock : NSObject {
+  
+  // whatever the erase option is enabled in the passcode settings
 	BOOL _eraseOption;
+  
+  // how many attemepts is user is allowed to have before the screen is locked
 	NSUInteger _attemptsAllowed;
 }
 
+/**
+ * a shared object which can change the passcode settings and perform generic actions
+ */
 + (KKPasscodeLock*)sharedLock;
 
+/**
+ * checks if a passcode has to be displayed
+ */
 - (BOOL)isPasscodeRequired;
 
+
+/**
+ * set the initial settings of the passcode settings
+ */
 - (void)setDefaultSettings;
 
 @property (nonatomic,assign) BOOL eraseOption;
+
 @property (nonatomic,assign) NSUInteger attemptsAllowed;
 
 @end
