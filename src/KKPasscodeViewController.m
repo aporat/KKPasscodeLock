@@ -19,7 +19,9 @@
 #import "KKKeychain.h"
 #import "KKPasscodeSettingsViewController.h"
 #import "KKPasscodeLock.h"
+
 #import <QuartzCore/QuartzCore.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface KKPasscodeViewController(Private)
 
@@ -203,6 +205,8 @@
 
 - (void)incrementAndShowFailedAttemptsLabel
 {
+  AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
 	_enterPasscodeTextField.text = @"";
 	for (int i = 0; i < 4; i++) {
 		[[[_squares objectAtIndex:_tableIndex] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];

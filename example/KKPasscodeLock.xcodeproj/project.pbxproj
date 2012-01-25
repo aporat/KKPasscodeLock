@@ -24,6 +24,7 @@
 		6DF13A6B14C6870B0069BBA5 /* KKPasscodeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF13A6214C6870B0069BBA5 /* KKPasscodeSettingsViewController.m */; };
 		6DF13A6C14C6870B0069BBA5 /* KKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF13A6414C6870B0069BBA5 /* KKPasscodeViewController.m */; };
 		6DFE33F714CF879E00E6EEA4 /* KKPasscodeLock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DFE33F614CF879E00E6EEA4 /* KKPasscodeLock.bundle */; };
+		6DFE344414CFBE8400E6EEA4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFE344314CFBE8400E6EEA4 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		6DF13A6314C6870B0069BBA5 /* KKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeViewController.h; path = ../../src/KKPasscodeViewController.h; sourceTree = "<group>"; };
 		6DF13A6414C6870B0069BBA5 /* KKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPasscodeViewController.m; path = ../../src/KKPasscodeViewController.m; sourceTree = "<group>"; };
 		6DFE33F614CF879E00E6EEA4 /* KKPasscodeLock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KKPasscodeLock.bundle; path = ../../src/KKPasscodeLock.bundle; sourceTree = "<group>"; };
+		6DFE344314CFBE8400E6EEA4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				6D3E345614C4F54E0003B72B /* CoreGraphics.framework in Frameworks */,
 				6D3E34BC14C4F90B0003B72B /* Security.framework in Frameworks */,
 				6D3E34BD14C4F90B0003B72B /* QuartzCore.framework in Frameworks */,
+				6DFE344414CFBE8400E6EEA4 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +119,7 @@
 		6D3E345014C4F54E0003B72B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DFE344314CFBE8400E6EEA4 /* AudioToolbox.framework */,
 				6D3E34BA14C4F90B0003B72B /* Security.framework */,
 				6D3E34BB14C4F90B0003B72B /* QuartzCore.framework */,
 				6D3E345114C4F54E0003B72B /* UIKit.framework */,
