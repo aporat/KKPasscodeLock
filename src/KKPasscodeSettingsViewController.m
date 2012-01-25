@@ -27,7 +27,7 @@
 @synthesize delegate = _delegate;
 
 #pragma mark -
-#pragma mark UIViewController
+#pragma mark UIViewController methods
 
 - (void)viewDidLoad
 {
@@ -38,9 +38,18 @@
 	[_eraseDataSwitch addTarget:self action:@selector(eraseDataSwitchChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
+- (void)viewDidUnload
+{  
+  [_eraseDataSwitch release];
+  _eraseDataSwitch = nil;
+
+  [super viewDidUnload];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+  
 	_passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
 	_eraseDataOn = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
 	_eraseDataSwitch.on = _eraseDataOn;
@@ -52,9 +61,9 @@
 }
 
 #pragma mark -
-#pragma mark UIActionSheetDelegate
+#pragma mark UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == 0) {
 		_eraseDataOn = YES;
@@ -81,7 +90,7 @@
 }
 
 #pragma mark -
-#pragma mark Table view data source
+#pragma mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -100,45 +109,43 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
 	if (section == 2) {
-		return [NSString stringWithFormat:@"Erase all data in this app after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];;
+		return [NSString stringWithFormat:@"Erase all content in the app after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];;
 	} else {
 		return @"";
 	}
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	static NSString *CellIdentifier = @"Cell";
+	static NSString *CellIdentifier = @"KKPasscodeSettingsCell";
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 	}
+  
+  cell.accessoryView = nil;
+  cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+  cell.textLabel.textAlignment = UITextAlignmentLeft;
+  cell.textLabel.textColor = [UIColor blackColor];
+
 	
 	if (indexPath.section == 0) {
+		cell.textLabel.textAlignment = UITextAlignmentCenter;
 		if (_passcodeLockOn) {
 			cell.textLabel.text = @"Turn Passcode Off";
 		} else {
 			cell.textLabel.text = @"Turn Passcode On";
 		}
-		cell.textLabel.textColor = [UIColor blackColor];
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
-		cell.accessoryView = nil;
-		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	} else if (indexPath.section == 1) {
 		cell.textLabel.text = @"Change Passcode";
-		if (_passcodeLockOn) {
-			cell.textLabel.textColor = [UIColor blackColor];
-			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-		} else {
-			cell.textLabel.textColor = [UIColor grayColor];
-			cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		}
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
-		cell.accessoryView = nil;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		if (!_passcodeLockOn) {
+			cell.textLabel.textColor = [UIColor grayColor];
+		}
 	} else if (indexPath.section == 2) {
 		cell.textLabel.text = @"Erase Data";
-		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		cell.accessoryView = _eraseDataSwitch;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (_passcodeLockOn) {
@@ -154,12 +161,12 @@
 }
 
 #pragma mark -
-#pragma mark Table view delegate
+#pragma mark UITableViewDelegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 	if (indexPath.section == 0) {
-		KKPasscodeViewController *vc = [[[KKPasscodeViewController alloc] initWithNibName:nil 
+		KKPasscodeViewController* vc = [[[KKPasscodeViewController alloc] initWithNibName:nil 
 																																							 bundle:nil] autorelease];
 		vc.delegate = self;
 		
@@ -221,15 +228,6 @@
 		[_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
 	}
 	
-}
-
-#pragma mark -
-#pragma mark Memory management
-
-- (void)dealloc
-{
-	[_eraseDataSwitch release];
-	[super dealloc];
 }
 
 

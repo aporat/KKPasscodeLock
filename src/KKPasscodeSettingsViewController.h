@@ -24,17 +24,25 @@
 
 @optional
 
+/**
+ * called when the passcode settings (either turned on/off) is changed
+ */
 - (void)didSettingsChanged:(KKPasscodeSettingsViewController*)viewController;
 
 @end
 
 @interface KKPasscodeSettingsViewController : UITableViewController <UIActionSheetDelegate, KKPasscodeViewControllerDelegate> {
 	
+  // delegate which notified then the passcode is turned on/off
 	id <KKPasscodeSettingsViewControllerDelegate> _delegate;
 	
+  // the erase content switch.
 	UISwitch* _eraseDataSwitch;
 	
+  // whatever the passcode lock is turned on or off
 	BOOL _passcodeLockOn;
+  
+  // whatever the erase data option is turned on or off
 	BOOL _eraseDataOn;
 }
 
