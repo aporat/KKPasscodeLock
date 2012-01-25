@@ -212,7 +212,8 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
 		}
 		
-		[self.navigationController presentModalViewController:nav animated:YES];		
+		[self.navigationController presentModalViewController:nav animated:YES];	
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
 
