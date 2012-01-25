@@ -66,7 +66,6 @@ typedef NSUInteger KKPasscodeMode;
 @end
 
 
-
 @interface KKPasscodeViewController : UIViewController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
 	
   // delegate which called when major events happens
@@ -75,9 +74,12 @@ typedef NSUInteger KKPasscodeMode;
 	UILabel* _passcodeConfirmationWarningLabel;
 	UIView* _failedAttemptsView;
 	UILabel* _failedAttemptsLabel;
+  
+  // failed attements coutner
 	NSInteger _failedAttemptsCount;
 	
-	NSUInteger _tableIndex;
+  // the current panel that being displayed
+	NSUInteger _currentPanel;
   
   // used to transition between table views
 	NSMutableArray* _tableViews;
