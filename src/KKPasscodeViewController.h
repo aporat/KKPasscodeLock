@@ -18,10 +18,29 @@
 #import <UIKit/UIKit.h>
 
 
+// The mode which controls the passcode view behavior
 enum {
+  /**
+   * Displays the passcode enter view, which the user has to enter the correct passcode
+   */
 	KKPasscodeModeEnter = 0,
+  
+  /**
+   * Creates a new passcode. This allows the user to enter a new passcode then
+   * imediately verify it.
+   */
 	KKPasscodeModeSet = 1,
+  
+  /**
+   * Disables an existing passcode. This allows the user to disable the passcode lock by 
+   * entering the passcode
+   */
 	KKPasscodeModeDisabled = 2,
+  
+  /**
+   * Changes an existing passcode. This allows the user to change the passcode by 
+   * entering the existing passcode, followed by a new passcode
+   */
 	KKPasscodeModeChange = 3
 };
 typedef NSUInteger KKPasscodeMode;
@@ -44,6 +63,7 @@ typedef NSUInteger KKPasscodeMode;
 
 @interface KKPasscodeViewController : UIViewController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
 	
+  // delegate which called when major events happens
 	id<KKPasscodeViewControllerDelegate> _delegate;
 	
 	UILabel* _passcodeConfirmationWarningLabel;
@@ -52,8 +72,12 @@ typedef NSUInteger KKPasscodeMode;
 	NSInteger _failedAttemptsCount;
 	
 	NSUInteger _tableIndex;
+  
 	NSMutableArray* _tableViews;
+  
+  // array of passcode entry text fields
 	NSMutableArray* _textFields;
+  
 	NSMutableArray* _squares;
 	
 	UITableView* _enterPasscodeTableView;
@@ -68,6 +92,7 @@ typedef NSUInteger KKPasscodeMode;
 	UITextField* _confirmPasscodeTextField;
 	NSArray* _confirmPasscodeSquareImageViews;
 	
+  // readwrite override for passlock mode
 	KKPasscodeMode _mode;
 	
 	BOOL _passcodeLockOn;
