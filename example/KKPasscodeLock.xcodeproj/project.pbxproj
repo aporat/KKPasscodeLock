@@ -23,10 +23,7 @@
 		6DF13A6A14C6870B0069BBA5 /* KKPasscodeLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF13A6014C6870B0069BBA5 /* KKPasscodeLock.m */; };
 		6DF13A6B14C6870B0069BBA5 /* KKPasscodeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF13A6214C6870B0069BBA5 /* KKPasscodeSettingsViewController.m */; };
 		6DF13A6C14C6870B0069BBA5 /* KKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF13A6414C6870B0069BBA5 /* KKPasscodeViewController.m */; };
-		6DF13A6D14C6870B0069BBA5 /* passcode_square_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DF13A6514C6870B0069BBA5 /* passcode_square_empty.png */; };
-		6DF13A6E14C6870B0069BBA5 /* passcode_square_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DF13A6614C6870B0069BBA5 /* passcode_square_empty@2x.png */; };
-		6DF13A6F14C6870B0069BBA5 /* passcode_square_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DF13A6714C6870B0069BBA5 /* passcode_square_filled.png */; };
-		6DF13A7014C6870B0069BBA5 /* passcode_square_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DF13A6814C6870B0069BBA5 /* passcode_square_filled@2x.png */; };
+		6DFE33F714CF879E00E6EEA4 /* KKPasscodeLock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DFE33F614CF879E00E6EEA4 /* KKPasscodeLock.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,10 +53,7 @@
 		6DF13A6214C6870B0069BBA5 /* KKPasscodeSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeSettingsViewController.m; path = ../../src/KKPasscodeSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6DF13A6314C6870B0069BBA5 /* KKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeViewController.h; path = ../../src/KKPasscodeViewController.h; sourceTree = "<group>"; };
 		6DF13A6414C6870B0069BBA5 /* KKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPasscodeViewController.m; path = ../../src/KKPasscodeViewController.m; sourceTree = "<group>"; };
-		6DF13A6514C6870B0069BBA5 /* passcode_square_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = passcode_square_empty.png; path = ../../src/passcode_square_empty.png; sourceTree = "<group>"; };
-		6DF13A6614C6870B0069BBA5 /* passcode_square_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "passcode_square_empty@2x.png"; path = "../../src/passcode_square_empty@2x.png"; sourceTree = "<group>"; };
-		6DF13A6714C6870B0069BBA5 /* passcode_square_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = passcode_square_filled.png; path = ../../src/passcode_square_filled.png; sourceTree = "<group>"; };
-		6DF13A6814C6870B0069BBA5 /* passcode_square_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "passcode_square_filled@2x.png"; path = "../../src/passcode_square_filled@2x.png"; sourceTree = "<group>"; };
+		6DFE33F614CF879E00E6EEA4 /* KKPasscodeLock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KKPasscodeLock.bundle; path = ../../src/KKPasscodeLock.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +128,7 @@
 		6D3E345714C4F54E0003B72B /* KKPasscodeLock */ = {
 			isa = PBXGroup;
 			children = (
+				6DFE33F614CF879E00E6EEA4 /* KKPasscodeLock.bundle */,
 				6DF13A5D14C6870B0069BBA5 /* KKKeychain.h */,
 				6DF13A5E14C6870B0069BBA5 /* KKKeychain.m */,
 				6DF13A5F14C6870B0069BBA5 /* KKPasscodeLock.h */,
@@ -142,10 +137,6 @@
 				6DF13A6214C6870B0069BBA5 /* KKPasscodeSettingsViewController.m */,
 				6DF13A6314C6870B0069BBA5 /* KKPasscodeViewController.h */,
 				6DF13A6414C6870B0069BBA5 /* KKPasscodeViewController.m */,
-				6DF13A6514C6870B0069BBA5 /* passcode_square_empty.png */,
-				6DF13A6614C6870B0069BBA5 /* passcode_square_empty@2x.png */,
-				6DF13A6714C6870B0069BBA5 /* passcode_square_filled.png */,
-				6DF13A6814C6870B0069BBA5 /* passcode_square_filled@2x.png */,
 			);
 			path = KKPasscodeLock;
 			sourceTree = "<group>";
@@ -232,10 +223,7 @@
 				6D3E345C14C4F54E0003B72B /* InfoPlist.strings in Resources */,
 				6D3E34D014C4F9910003B72B /* RootViewController.xib in Resources */,
 				6DF13A5C14C686FC0069BBA5 /* SettingsViewController.xib in Resources */,
-				6DF13A6D14C6870B0069BBA5 /* passcode_square_empty.png in Resources */,
-				6DF13A6E14C6870B0069BBA5 /* passcode_square_empty@2x.png in Resources */,
-				6DF13A6F14C6870B0069BBA5 /* passcode_square_filled.png in Resources */,
-				6DF13A7014C6870B0069BBA5 /* passcode_square_filled@2x.png in Resources */,
+				6DFE33F714CF879E00E6EEA4 /* KKPasscodeLock.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
