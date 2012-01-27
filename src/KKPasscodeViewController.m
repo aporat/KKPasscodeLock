@@ -84,12 +84,18 @@
   
 	_enterPasscodeTextField = [[UITextField alloc] init];
   _enterPasscodeTextField.delegate = self;
-  
+  _enterPasscodeTextField.keyboardType = UIKeyboardTypeNumberPad;
+	_enterPasscodeTextField.hidden = YES;
+
   _setPasscodeTextField = [[UITextField alloc] init];
   _setPasscodeTextField.delegate = self;
+  _setPasscodeTextField.keyboardType = UIKeyboardTypeNumberPad;
+	_setPasscodeTextField.hidden = YES;
   
 	_confirmPasscodeTextField = [[UITextField alloc] init];
   _confirmPasscodeTextField.delegate = self;
+  _confirmPasscodeTextField.keyboardType = UIKeyboardTypeNumberPad;
+	_confirmPasscodeTextField.hidden = YES;
 	
 	_tableViews = [[NSMutableArray alloc] init];
 	_textFields = [[NSMutableArray alloc] init];
@@ -118,6 +124,8 @@
   } else {
     self.navigationItem.title = @"Enter Passcode";
   }
+  
+
   
 	if (_mode == KKPasscodeModeSet || _mode == KKPasscodeModeChange) {
 		if (_passcodeLockOn) {
@@ -481,11 +489,7 @@
 
 - (UIView*)headerViewForTextField:(UITextField*)textField
 {
-	textField.keyboardType = UIKeyboardTypeNumberPad;
-	
-	textField.hidden = YES;
-	[self.view addSubview:textField];
-	
+  [self.view addSubview:textField];
 	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 70.0)] autorelease];
 	UILabel *headerLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 28.0, self.view.bounds.size.width, 30.0)] autorelease];
 	headerLabel.textColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.4 alpha:1.0];
@@ -510,13 +514,11 @@
 	}
 	
 	if ([textField isEqual:_enterPasscodeTextField]) {
-		NSString *text = @"1 Failed Passcode Attempt";
-		CGSize size = [text sizeWithFont:[UIFont boldSystemFontOfSize:14.0]];
-		_failedAttemptsView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - (size.width + 36.0)) / 2, 146.0, size.width + 36.0, size.height + 10.0)];
-		_failedAttemptsLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - (size.width + 36.0)) / 2, 146.0, size.width + 36.0, size.height + 10.0)]; 
+		_failedAttemptsView = [[[UIView alloc] init] autorelease];
+		_failedAttemptsLabel = [[[UILabel alloc] init] autorelease];
 		_failedAttemptsLabel.backgroundColor = [UIColor clearColor];
 		_failedAttemptsLabel.textColor = [UIColor whiteColor];
-		_failedAttemptsLabel.text = text;
+		_failedAttemptsLabel.text = @"";
 		_failedAttemptsLabel.font = [UIFont boldSystemFontOfSize:14.0];
 		_failedAttemptsLabel.textAlignment = UITextAlignmentCenter;
 		_failedAttemptsLabel.shadowOffset = CGSizeMake(0, -1.0);
@@ -527,20 +529,11 @@
 		
 		_failedAttemptsLabel.hidden = YES;
 		_failedAttemptsView.hidden = YES;
-		
-		CAGradientLayer *gradient = [CAGradientLayer layer];
-		gradient.frame = _failedAttemptsView.bounds;				
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[[UIColor colorWithRed:0.7 green:0.05 blue:0.05 alpha:1.0] CGColor], 
-                       (id)[[UIColor colorWithRed:0.8 green:0.2 blue:0.2 alpha:1.0] CGColor], nil];
-		[_failedAttemptsView.layer insertSublayer:gradient atIndex:1];
+
 		_failedAttemptsView.layer.masksToBounds = YES;
 		
 		[headerView addSubview:_failedAttemptsView];
 		[headerView addSubview:_failedAttemptsLabel];
-		
-		[_failedAttemptsView release];
-		[_failedAttemptsLabel release];
 	}
 	
 	if (_mode == KKPasscodeModeSet) {
@@ -596,10 +589,12 @@
 	return 0;
 }
 
+
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return 1;
 }
+
 
 - (UITableViewCell*)tableView:(UITableView*)aTableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
