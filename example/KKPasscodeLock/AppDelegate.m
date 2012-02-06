@@ -86,7 +86,8 @@
 {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
-  [alert release];}
+  [alert release];
+}
 
 
 @end

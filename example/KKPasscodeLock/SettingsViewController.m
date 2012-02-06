@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.navigationItem.title = @"Settings";
+  self.navigationItem.title = NSLocalizedString(@"Settings", "");
   
   
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
@@ -66,11 +66,11 @@
   }
   
   if (indexPath.section == 0) {
-    cell.textLabel.text = @"Passcode Lock";
+    cell.textLabel.text = NSLocalizedString(@"Passcode Lock", "");
     if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
-      cell.detailTextLabel.text = @"On";
+      cell.detailTextLabel.text = NSLocalizedString(@"On", "");
     } else {
-      cell.detailTextLabel.text = @"Off";
+      cell.detailTextLabel.text = NSLocalizedString(@"Off", "");
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   } 

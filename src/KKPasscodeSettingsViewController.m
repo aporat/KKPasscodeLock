@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.navigationItem.title = @"Passcode Lock";
+	self.navigationItem.title = NSLocalizedString(@"Passcode Lock", "");
 		
 	_eraseDataSwitch = [[UISwitch alloc] init];
 	[_eraseDataSwitch addTarget:self action:@selector(eraseDataSwitchChanged:) forControlEvents:UIControlEventValueChanged];
@@ -78,9 +78,9 @@
 - (void)eraseDataSwitchChanged:(id)sender 
 {
 	if (_eraseDataSwitch.on) {
-		NSString* title = [NSString stringWithFormat:@"All data in this app will be erased after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];
+		NSString* title = [NSString stringWithFormat:NSLocalizedString(@"All data in this app will be erased after %d failed passcode attempts.", ""), [[KKPasscodeLock sharedLock] attemptsAllowed]];
 		
-		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Enable" otherButtonTitles:nil];
+		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", "") destructiveButtonTitle:NSLocalizedString(@"Enable", "") otherButtonTitles:nil];
 		[sheet showInView:self.view];
 		[sheet release];
 	} else {
@@ -109,7 +109,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
 	if (section == 2) {
-		return [NSString stringWithFormat:@"Erase all content in the app after %d failed passcode attempts.", [[KKPasscodeLock sharedLock] attemptsAllowed]];;
+		return [NSString stringWithFormat:NSLocalizedString(@"Erase all content in the app after %d failed passcode attempts.", ""), [[KKPasscodeLock sharedLock] attemptsAllowed]];;
 	} else {
 		return @"";
 	}
@@ -133,19 +133,19 @@
 	if (indexPath.section == 0) {
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
 		if (_passcodeLockOn) {
-			cell.textLabel.text = @"Turn Passcode Off";
+			cell.textLabel.text = NSLocalizedString(@"Turn Passcode Off", "");
 		} else {
-			cell.textLabel.text = @"Turn Passcode On";
+			cell.textLabel.text = NSLocalizedString(@"Turn Passcode On", "");
 		}
 	} else if (indexPath.section == 1) {
-		cell.textLabel.text = @"Change Passcode";
+		cell.textLabel.text = NSLocalizedString(@"Change Passcode", "");
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (!_passcodeLockOn) {
 			cell.textLabel.textColor = [UIColor grayColor];
 		}
 	} else if (indexPath.section == 2) {
-		cell.textLabel.text = @"Erase Data";
+		cell.textLabel.text = NSLocalizedString(@"Erase Data", "");
 		cell.accessoryView = _eraseDataSwitch;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (_passcodeLockOn) {
