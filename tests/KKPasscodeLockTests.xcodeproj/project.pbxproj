@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D2394C81548CA89004DF3B7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394C71548CA89004DF3B7 /* SenTestingKit.framework */; };
+		6D2394CA1548CA89004DF3B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394C91548CA89004DF3B7 /* UIKit.framework */; };
+		6D2394CB1548CA89004DF3B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394B91548CA89004DF3B7 /* Foundation.framework */; };
+		6D2394D41548CA89004DF3B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D2394D21548CA89004DF3B7 /* InfoPlist.strings */; };
+		6D2394D71548CA89004DF3B7 /* KKPasscodeLockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394D61548CA89004DF3B7 /* KKPasscodeLockTests.m */; };
+		6D2394E91548CAA8004DF3B7 /* KKPasscodeLock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */; };
+		6D2394EC1548CAA8004DF3B7 /* KKKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E21548CAA8004DF3B7 /* KKKeychain.m */; };
+		6D2394EF1548CAA8004DF3B7 /* KKPasscodeLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */; };
+		6D2394F21548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */; };
+		6D2394F51548CAA8004DF3B7 /* KKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */; };
+		6D2394F81548CBAA004DF3B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394F61548CBAA004DF3B7 /* AudioToolbox.framework */; };
+		6D2394F91548CBAA004DF3B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394F71548CBAA004DF3B7 /* CoreGraphics.framework */; };
+		6D2394FB1548CBAE004DF3B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394FA1548CBAE004DF3B7 /* Security.framework */; };
+		6D2394FD1548CBC5004DF3B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394FC1548CBC5004DF3B7 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6D2394B91548CA89004DF3B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D2394BD1548CA89004DF3B7 /* KKPasscodeLock-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KKPasscodeLock-Prefix.pch"; sourceTree = "<group>"; };
+		6D2394C61548CA89004DF3B7 /* KKPasscodeLock.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KKPasscodeLock.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D2394C71548CA89004DF3B7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		6D2394C91548CA89004DF3B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		6D2394D11548CA89004DF3B7 /* KKPasscodeLock-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KKPasscodeLock-Info.plist"; sourceTree = "<group>"; };
+		6D2394D31548CA89004DF3B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D2394D51548CA89004DF3B7 /* KKPasscodeLockTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKPasscodeLockTests.h; sourceTree = "<group>"; };
+		6D2394D61548CA89004DF3B7 /* KKPasscodeLockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKPasscodeLockTests.m; sourceTree = "<group>"; };
+		6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KKPasscodeLock.bundle; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.bundle; sourceTree = "<absolute>"; };
+		6D2394E11548CAA8004DF3B7 /* KKKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKKeychain.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKKeychain.h; sourceTree = "<absolute>"; };
+		6D2394E21548CAA8004DF3B7 /* KKKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKKeychain.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKKeychain.m; sourceTree = "<absolute>"; };
+		6D2394E31548CAA8004DF3B7 /* KKPasscodeLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeLock.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.h; sourceTree = "<absolute>"; };
+		6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeLock.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.m; sourceTree = "<absolute>"; };
+		6D2394E51548CAA8004DF3B7 /* KKPasscodeSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeSettingsViewController.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeSettingsViewController.h; sourceTree = "<absolute>"; };
+		6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeSettingsViewController.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeSettingsViewController.m; sourceTree = "<absolute>"; };
+		6D2394E71548CAA8004DF3B7 /* KKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeViewController.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeViewController.h; sourceTree = "<absolute>"; };
+		6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeViewController.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeViewController.m; sourceTree = "<absolute>"; };
+		6D2394F61548CBAA004DF3B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6D2394F71548CBAA004DF3B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D2394FA1548CBAE004DF3B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6D2394FC1548CBC5004DF3B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D2394C21548CA89004DF3B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D2394FD1548CBC5004DF3B7 /* QuartzCore.framework in Frameworks */,
+				6D2394FB1548CBAE004DF3B7 /* Security.framework in Frameworks */,
+				6D2394F81548CBAA004DF3B7 /* AudioToolbox.framework in Frameworks */,
+				6D2394F91548CBAA004DF3B7 /* CoreGraphics.framework in Frameworks */,
+				6D2394C81548CA89004DF3B7 /* SenTestingKit.framework in Frameworks */,
+				6D2394CA1548CA89004DF3B7 /* UIKit.framework in Frameworks */,
+				6D2394CB1548CA89004DF3B7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D2394AB1548CA89004DF3B7 = {
+			isa = PBXGroup;
+			children = (
+				6D2394BB1548CA89004DF3B7 /* KKPasscodeLock */,
+				6D2394CF1548CA89004DF3B7 /* KKPasscodeLockTests */,
+				6D2394B81548CA89004DF3B7 /* Frameworks */,
+				6D2394B71548CA89004DF3B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D2394B71548CA89004DF3B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394C61548CA89004DF3B7 /* KKPasscodeLock.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D2394B81548CA89004DF3B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394FC1548CBC5004DF3B7 /* QuartzCore.framework */,
+				6D2394FA1548CBAE004DF3B7 /* Security.framework */,
+				6D2394F61548CBAA004DF3B7 /* AudioToolbox.framework */,
+				6D2394F71548CBAA004DF3B7 /* CoreGraphics.framework */,
+				6D2394B91548CA89004DF3B7 /* Foundation.framework */,
+				6D2394C71548CA89004DF3B7 /* SenTestingKit.framework */,
+				6D2394C91548CA89004DF3B7 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D2394BB1548CA89004DF3B7 /* KKPasscodeLock */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */,
+				6D2394E11548CAA8004DF3B7 /* KKKeychain.h */,
+				6D2394E21548CAA8004DF3B7 /* KKKeychain.m */,
+				6D2394E31548CAA8004DF3B7 /* KKPasscodeLock.h */,
+				6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */,
+				6D2394E51548CAA8004DF3B7 /* KKPasscodeSettingsViewController.h */,
+				6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */,
+				6D2394E71548CAA8004DF3B7 /* KKPasscodeViewController.h */,
+				6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */,
+				6D2394BC1548CA89004DF3B7 /* Supporting Files */,
+			);
+			path = KKPasscodeLock;
+			sourceTree = "<group>";
+		};
+		6D2394BC1548CA89004DF3B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394BD1548CA89004DF3B7 /* KKPasscodeLock-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D2394CF1548CA89004DF3B7 /* KKPasscodeLockTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394D51548CA89004DF3B7 /* KKPasscodeLockTests.h */,
+				6D2394D61548CA89004DF3B7 /* KKPasscodeLockTests.m */,
+				6D2394D01548CA89004DF3B7 /* Supporting Files */,
+			);
+			path = KKPasscodeLockTests;
+			sourceTree = "<group>";
+		};
+		6D2394D01548CA89004DF3B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D2394D11548CA89004DF3B7 /* KKPasscodeLock-Info.plist */,
+				6D2394D21548CA89004DF3B7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D2394C51548CA89004DF3B7 /* KKPasscodeLockTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D2394DD1548CA89004DF3B7 /* Build configuration list for PBXNativeTarget "KKPasscodeLockTests" */;
+			buildPhases = (
+				6D2394C11548CA89004DF3B7 /* Sources */,
+				6D2394C21548CA89004DF3B7 /* Frameworks */,
+				6D2394C31548CA89004DF3B7 /* Resources */,
+				6D2394C41548CA89004DF3B7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KKPasscodeLockTests;
+			productName = KKPasscodeLockTests;
+			productReference = 6D2394C61548CA89004DF3B7 /* KKPasscodeLock.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D2394AD1548CA89004DF3B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Kosher Penguin LLC";
+			};
+			buildConfigurationList = 6D2394B01548CA89004DF3B7 /* Build configuration list for PBXProject "KKPasscodeLockTests" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D2394AB1548CA89004DF3B7;
+			productRefGroup = 6D2394B71548CA89004DF3B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D2394C51548CA89004DF3B7 /* KKPasscodeLockTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D2394C31548CA89004DF3B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D2394D41548CA89004DF3B7 /* InfoPlist.strings in Resources */,
+				6D2394E91548CAA8004DF3B7 /* KKPasscodeLock.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D2394C41548CA89004DF3B7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D2394C11548CA89004DF3B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D2394D71548CA89004DF3B7 /* KKPasscodeLockTests.m in Sources */,
+				6D2394EC1548CAA8004DF3B7 /* KKKeychain.m in Sources */,
+				6D2394EF1548CAA8004DF3B7 /* KKPasscodeLock.m in Sources */,
+				6D2394F21548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m in Sources */,
+				6D2394F51548CAA8004DF3B7 /* KKPasscodeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6D2394D21548CA89004DF3B7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D2394D31548CA89004DF3B7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D2394D81548CA89004DF3B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6D2394D91548CA89004DF3B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D2394DE1548CA89004DF3B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
+				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				PRODUCT_NAME = KKPasscodeLock;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6D2394DF1548CA89004DF3B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
+				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				PRODUCT_NAME = KKPasscodeLock;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D2394B01548CA89004DF3B7 /* Build configuration list for PBXProject "KKPasscodeLockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2394D81548CA89004DF3B7 /* Debug */,
+				6D2394D91548CA89004DF3B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D2394DD1548CA89004DF3B7 /* Build configuration list for PBXNativeTarget "KKPasscodeLockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2394DE1548CA89004DF3B7 /* Debug */,
+				6D2394DF1548CA89004DF3B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D2394AD1548CA89004DF3B7 /* Project object */;
+}
