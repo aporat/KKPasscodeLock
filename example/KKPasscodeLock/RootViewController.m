@@ -22,18 +22,14 @@
 
 - (IBAction)showPasscode:(id)sender {
   
-  SettingsViewController* settingsViewController = [[[SettingsViewController alloc] 
-                                                     initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+  SettingsViewController* settingsViewController = [[SettingsViewController alloc] 
+                                                     initWithNibName:@"SettingsViewController" bundle:nil];
   
-  UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:settingsViewController] autorelease];
+  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
   
   [self presentModalViewController:navController animated:YES];
   
 }
 
-- (void)dealloc
-{
-  [super dealloc];
-}
 
 @end

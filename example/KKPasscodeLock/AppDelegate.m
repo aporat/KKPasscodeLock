@@ -24,21 +24,16 @@
 @synthesize window = _window;
 @synthesize navigationController=_navigationController;
 
-- (void)dealloc
-{
-  [_window release];
-  [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
   [[KKPasscodeLock sharedLock] setDefaultSettings];
   
-  self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   
-  RootViewController* vc = [[[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil] autorelease];
+  RootViewController* vc = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
   
   _navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
   [self.window addSubview:_navigationController.view];  
@@ -51,7 +46,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
-    KKPasscodeViewController *vc = [[[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
     vc.mode = KKPasscodeModeEnter;
     vc.delegate = self;
     
@@ -79,14 +74,12 @@
 {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times. All account data in this app has been deleted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
-  [alert release];
 }
 
 - (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController 
 {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You have entered an incorrect passcode too many times." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
-  [alert release];
 }
 
 

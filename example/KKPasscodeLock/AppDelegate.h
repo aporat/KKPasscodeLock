@@ -21,6 +21,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, KKPasscodeViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic) IBOutlet UINavigationController *navigationController;
 
 @end
