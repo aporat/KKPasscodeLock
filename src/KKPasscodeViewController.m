@@ -106,20 +106,20 @@
   
   if (_mode == KKPasscodeModeSet) {
     self.navigationItem.title = NSLocalizedString(@"Set Passcode", "");
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                            target:self
-                                                                                           action:@selector(cancelButtonPressed:)] autorelease];
+                                                                                           action:@selector(cancelButtonPressed:)];
   } else if (_mode == KKPasscodeModeChange) {
     self.navigationItem.title = NSLocalizedString(@"Change Passcode", "");
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                            target:self
-                                                                                           action:@selector(cancelButtonPressed:)] autorelease];
+                                                                                           action:@selector(cancelButtonPressed:)];
 
   } else if (_mode == KKPasscodeModeDisabled) {
     self.navigationItem.title = NSLocalizedString(@"Turn off Passcode", "");
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                            target:self
-                                                                                           action:@selector(cancelButtonPressed:)] autorelease];
+                                                                                           action:@selector(cancelButtonPressed:)];
 
   } else {
     self.navigationItem.title = NSLocalizedString(@"Enter Passcode", "");
@@ -133,7 +133,7 @@
 			[_tableViews addObject:_enterPasscodeTableView];
 			[_textFields addObject:_enterPasscodeTextField];
 			[_boxes addObject:[self boxes]];
-			UIView *boxesView = [[[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)] autorelease];
+			UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
 			boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 			for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 				[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -146,7 +146,7 @@
 		[_tableViews addObject:_setPasscodeTableView];
 		[_textFields addObject:_setPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesView = [[[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)] autorelease];
+		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
 		boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -157,7 +157,7 @@
 		[_tableViews addObject:_confirmPasscodeTableView];
 		[_textFields addObject:_confirmPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesConfirmView = [[[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)] autorelease];
+		UIView *boxesConfirmView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
 		boxesConfirmView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesConfirmView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -168,7 +168,7 @@
 		[_tableViews addObject:_enterPasscodeTableView];
 		[_textFields addObject:_enterPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesView = [[[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)] autorelease];
+		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
 		boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -490,8 +490,8 @@
 - (UIView*)headerViewForTextField:(UITextField*)textField
 {
   [self.view addSubview:textField];
-	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 70.0)] autorelease];
-	UILabel *headerLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 28.0, self.view.bounds.size.width, 30.0)] autorelease];
+	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 70.0)];
+	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 28.0, self.view.bounds.size.width, 30.0)];
 	headerLabel.textColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.4 alpha:1.0];
 	headerLabel.backgroundColor = [UIColor clearColor];
 	headerLabel.textAlignment = UITextAlignmentCenter;
@@ -514,8 +514,8 @@
 	}
 	
 	if ([textField isEqual:_enterPasscodeTextField]) {
-		_failedAttemptsView = [[[UIView alloc] init] autorelease];
-		_failedAttemptsLabel = [[[UILabel alloc] init] autorelease];
+		_failedAttemptsView = [[UIView alloc] init];
+		_failedAttemptsLabel = [[UILabel alloc] init];
 		_failedAttemptsLabel.backgroundColor = [UIColor clearColor];
 		_failedAttemptsLabel.textColor = [UIColor whiteColor];
 		_failedAttemptsLabel.text = @"";
@@ -575,7 +575,6 @@
 		UIImageView *square = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
 		square.frame = CGRectMake(squareX, 74.0, kPasscodeBoxWidth, kPasscodeBoxHeight);
 		[squareViews addObject:square];
-		[square release];
 		squareX += 71.0;
 	}
 	return [NSArray arrayWithArray:squareViews];
@@ -602,7 +601,7 @@
 	
 	UITableViewCell* cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	
@@ -662,19 +661,5 @@
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc 
-{	 
-  [_enterPasscodeTableView release];
-  [_setPasscodeTableView release];
-  [_confirmPasscodeTableView release];
-  
-	[_enterPasscodeTextField release];
-	[_setPasscodeTextField release];
-	[_confirmPasscodeTextField release];
-	[_tableViews release];
-	[_textFields release];
-	[_boxes release];
-	[super dealloc];
-}
 
 @end

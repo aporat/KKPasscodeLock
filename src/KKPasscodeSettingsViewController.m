@@ -40,7 +40,6 @@
 
 - (void)viewDidUnload
 {  
-  [_eraseDataSwitch release];
   _eraseDataSwitch = nil;
 
   [super viewDidUnload];
@@ -82,7 +81,6 @@
 		
 		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", "") destructiveButtonTitle:NSLocalizedString(@"Enable", "") otherButtonTitles:nil];
 		[sheet showInView:self.view];
-		[sheet release];
 	} else {
 		_eraseDataOn = NO;
 		[KKKeychain setString:@"NO" forKey:@"erase_data_on"];
@@ -121,7 +119,7 @@
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
   
   cell.accessoryView = nil;
@@ -166,8 +164,8 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 	if (indexPath.section == 0) {
-		KKPasscodeViewController* vc = [[[KKPasscodeViewController alloc] initWithNibName:nil 
-																																							 bundle:nil] autorelease];
+		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil 
+																																							 bundle:nil];
 		vc.delegate = self;
 		
 		if (_passcodeLockOn) {
@@ -176,7 +174,7 @@
 			vc.mode = KKPasscodeModeSet;
 		}
 		
-		UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 		 
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			nav.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -193,12 +191,12 @@
 		
 		
 	} else if (indexPath.section == 1 && _passcodeLockOn) {
-		KKPasscodeViewController *vc = [[[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
 		vc.delegate = self;
 		
 		vc.mode = KKPasscodeModeChange;							
 		
-		UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 		
 		
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
