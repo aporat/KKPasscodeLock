@@ -15,5 +15,15 @@ KKPasscodeLock is an iOS toolkit for adding a passcode view controller and passc
 - Advanced passcode settings controller: set & change passcode, turn off/on passcode and passcode tries allowed
 - Passcode is saved securly in the device keychain
 
+
+<h2>Using KKPasscodeLock</h2>
+
+Using this framework is really easy.
+
+- Add all the source files under the src folder, including KKPasscodeLock.bundle
+- `#import "KKPasscodeLock.h"` where you need it.
+- Add the `AudioToolbox.framework`, `Security.framework` and the `QuartzCore.framework` into your project
+- See the usage of the passcode lock from the sample app
+
 <h2>Terms of Use</h2>
 - Provided under the Apache 2.0 License
