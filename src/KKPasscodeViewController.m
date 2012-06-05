@@ -23,7 +23,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface KKPasscodeViewController(Private)
+@interface KKPasscodeViewController (Private)
 
 - (UITextField*)passcodeTextField;
 - (NSArray*)boxes;
@@ -72,6 +72,9 @@
 	_confirmPasscodeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	_confirmPasscodeTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	[self.view addSubview:_confirmPasscodeTableView];
+    
+    _shouldReleaseFirstResponser = NO;
+
 }
 
 
@@ -206,7 +209,14 @@
 }
 
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _shouldReleaseFirstResponser = YES;
+    [_enterPasscodeTextField resignFirstResponder];
+    [_setPasscodeTextField resignFirstResponder];
+    [_confirmPasscodeTextField resignFirstResponder];
+}
 
 
 #pragma mark -
@@ -287,8 +297,9 @@
 	newTableView.frame = self.view.frame;
 	[UIView commitAnimations];
 	
-	
+	_shouldReleaseFirstResponser = YES;
 	[[_textFields objectAtIndex:_currentPanel - 1] resignFirstResponder];
+	_shouldReleaseFirstResponser = NO;
 	[[_textFields objectAtIndex:_currentPanel] becomeFirstResponder];
 }
 
@@ -311,7 +322,9 @@
 	newTableView.frame = self.view.frame;
 	[UIView commitAnimations];
 	
+    _shouldReleaseFirstResponser = YES;
 	[[_textFields objectAtIndex:_currentPanel + 1] resignFirstResponder];
+    _shouldReleaseFirstResponser = NO;
 	[[_textFields objectAtIndex:_currentPanel] becomeFirstResponder];
 }
 
@@ -657,6 +670,9 @@
 
 
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return _shouldReleaseFirstResponser;
+}
 
 #pragma mark -
 #pragma mark Memory management
