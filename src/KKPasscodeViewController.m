@@ -43,6 +43,11 @@
 #pragma mark -
 #pragma mark UIViewController
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
 - (void)loadView
 {
 	[super loadView];
