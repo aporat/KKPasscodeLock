@@ -187,6 +187,8 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
 		}
 		
+		[self.delegate passcodeLockWillBePresented];
+    
 		[self.navigationController presentModalViewController:nav animated:YES];
 		
 		
@@ -210,9 +212,11 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
 		}
 		
-		[self.navigationController presentModalViewController:nav animated:YES];	
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+		[self.delegate passcodeLockWillBePresented];
+    
+		[self.navigationController presentModalViewController:nav animated:YES];
 	}
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController 
