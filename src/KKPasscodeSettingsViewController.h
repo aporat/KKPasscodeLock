@@ -29,6 +29,11 @@
  */
 - (void)didSettingsChanged:(KKPasscodeSettingsViewController*)viewController;
 
+/**
+ * called when the passcode lock dialog will be presented
+ */
+- (void)passcodeLockWillBePresented;
+
 @end
 
 @interface KKPasscodeSettingsViewController : UITableViewController <UIActionSheetDelegate, KKPasscodeViewControllerDelegate> {
