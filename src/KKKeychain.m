@@ -58,16 +58,16 @@
 			[addDict setObject:data forKey:(__bridge id)kSecValueData];
             
 			res = SecItemAdd((__bridge_retained CFDictionaryRef)addDict, NULL);
-			NSAssert1(res == errSecSuccess, @"Recieved %d from SecItemAdd!", res);
+			NSAssert1(res == errSecSuccess, @"Recieved %ld from SecItemAdd!", res);
 		}
 	} else if (res == errSecSuccess) {
 		// Modify an existing one
 		// Actually pull it now of the keychain at this point.
 		NSDictionary *attributeDict = [NSDictionary dictionaryWithObject:data forKey:(__bridge id)kSecValueData];
 		res = SecItemUpdate((__bridge_retained CFDictionaryRef)existsQueryDictionary, (__bridge_retained CFDictionaryRef)attributeDict);
-		NSAssert1(res == errSecSuccess, @"SecItemUpdated returned %d!", res);
+		NSAssert1(res == errSecSuccess, @"SecItemUpdated returned %ld!", res);
 	} else {
-		NSAssert1(NO, @"Received %d from SecItemCopyMatching!", res);
+		NSAssert1(NO, @"Received %ld from SecItemCopyMatching!", res);
 	}
 	return YES;
 }
@@ -93,7 +93,7 @@
 		NSString *string = [[NSString alloc] initWithData:(__bridge NSData*)data encoding:NSUTF8StringEncoding];
 		return string;
 	} else {
-		NSAssert1(res == errSecItemNotFound, @"SecItemCopyMatching returned %d!", res);
+		NSAssert1(res == errSecItemNotFound, @"SecItemCopyMatching returned %ld!", res);
 	}
 	
 	return nil;
