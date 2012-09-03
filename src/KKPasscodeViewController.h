@@ -106,6 +106,10 @@ typedef NSUInteger KKPasscodeMode;
     
     // whatever the erase data option is turned on or off
     BOOL _eraseData;
+    
+    // Used to make sure we do not release the keyboard when on iPad
+    BOOL _shouldReleaseFirstResponser;
+    
 }
 
 @property (nonatomic, unsafe_unretained) id <KKPasscodeViewControllerDelegate> delegate;
