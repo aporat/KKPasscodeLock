@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +17,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KKKeychain : NSObject {
-	
-}
+@interface KKKeychain : NSObject
 
 + (BOOL)setString:(NSString*)string forKey:(NSString*)key;
 

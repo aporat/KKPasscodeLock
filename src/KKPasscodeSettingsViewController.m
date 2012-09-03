@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,22 +33,22 @@
 {
 	[super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Passcode Lock", "");
-		
+    
 	_eraseDataSwitch = [[UISwitch alloc] init];
 	[_eraseDataSwitch addTarget:self action:@selector(eraseDataSwitchChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewDidUnload
-{  
-  _eraseDataSwitch = nil;
-
-  [super viewDidUnload];
+{
+    _eraseDataSwitch = nil;
+    
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-  
+    
 	_passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
 	_eraseDataOn = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
 	_eraseDataSwitch.on = _eraseDataOn;
@@ -74,7 +74,7 @@
 	[_eraseDataSwitch setOn:_eraseDataOn animated:YES];
 }
 
-- (void)eraseDataSwitchChanged:(id)sender 
+- (void)eraseDataSwitchChanged:(id)sender
 {
 	if (_eraseDataSwitch.on) {
 		NSString* title = [NSString stringWithFormat:NSLocalizedString(@"All data in this app will be erased after %d failed passcode attempts.", ""), [[KKPasscodeLock sharedLock] attemptsAllowed]];
@@ -84,7 +84,7 @@
 	} else {
 		_eraseDataOn = NO;
 		[KKKeychain setString:@"NO" forKey:@"erase_data_on"];
-	}		 
+	}
 }
 
 #pragma mark -
@@ -121,12 +121,12 @@
 	if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
-  
-  cell.accessoryView = nil;
-  cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-  cell.textLabel.textAlignment = UITextAlignmentLeft;
-  cell.textLabel.textColor = [UIColor blackColor];
-
+    
+    cell.accessoryView = nil;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.textLabel.textAlignment = UITextAlignmentLeft;
+    cell.textLabel.textColor = [UIColor blackColor];
+    
 	
 	if (indexPath.section == 0) {
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
@@ -138,7 +138,7 @@
 	} else if (indexPath.section == 1) {
 		cell.textLabel.text = NSLocalizedString(@"Change Passcode", "");
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (!_passcodeLockOn) {
 			cell.textLabel.textColor = [UIColor grayColor];
 		}
@@ -164,8 +164,8 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 	if (indexPath.section == 0) {
-		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil 
-																																							 bundle:nil];
+		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil
+                                                                                  bundle:nil];
 		vc.delegate = self;
 		
 		if (_passcodeLockOn) {
@@ -175,7 +175,7 @@
 		}
 		
 		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-		 
+        
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			nav.modalPresentationStyle = UIModalPresentationFormSheet;
 			nav.navigationBar.barStyle = UIBarStyleBlack;
@@ -184,7 +184,7 @@
 			nav.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
 			nav.navigationBar.translucent = self.navigationController.navigationBar.translucent;
 			nav.navigationBar.opaque = self.navigationController.navigationBar.opaque;
-			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
+			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
 		}
 		
 		[self.navigationController presentModalViewController:nav animated:YES];
@@ -194,7 +194,7 @@
 		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
 		vc.delegate = self;
 		
-		vc.mode = KKPasscodeModeChange;							
+		vc.mode = KKPasscodeModeChange;
 		
 		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 		
@@ -207,20 +207,20 @@
 			nav.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
 			nav.navigationBar.translucent = self.navigationController.navigationBar.translucent;
 			nav.navigationBar.opaque = self.navigationController.navigationBar.opaque;
-			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
+			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
 		}
 		
-		[self.navigationController presentModalViewController:nav animated:YES];	
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+		[self.navigationController presentModalViewController:nav animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
 
-- (void)didSettingsChanged:(KKPasscodeViewController*)viewController 
+- (void)didSettingsChanged:(KKPasscodeViewController*)viewController
 {
 	_passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
 	_eraseDataOn = [[KKKeychain getStringForKey:@"erase_data_on"] isEqualToString:@"YES"];
 	_eraseDataSwitch.on = _eraseDataOn;
-
+    
 	[self.tableView reloadData];
 	
 	if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {

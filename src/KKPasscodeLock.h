@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,11 +19,11 @@
 #import "KKPasscodeViewController.h"
 
 @interface KKPasscodeLock : NSObject {
-  
-  // whatever the erase option is enabled in the passcode settings
+    
+    // whatever the erase option is enabled in the passcode settings
 	BOOL _eraseOption;
-  
-  // how many attemepts is user is allowed to have before the screen is locked
+    
+    // how many attemepts is user is allowed to have before the screen is locked
 	NSUInteger _attemptsAllowed;
 }
 
