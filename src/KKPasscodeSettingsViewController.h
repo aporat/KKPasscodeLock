@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,16 +33,16 @@
 
 @interface KKPasscodeSettingsViewController : UITableViewController <UIActionSheetDelegate, KKPasscodeViewControllerDelegate> {
 	
-  // delegate which notified then the passcode is turned on/off
+    // delegate which notified then the passcode is turned on/off
 	id <KKPasscodeSettingsViewControllerDelegate> __unsafe_unretained _delegate;
 	
-  // the erase content switch.
+    // the erase content switch.
 	UISwitch* _eraseDataSwitch;
 	
-  // whatever the passcode lock is turned on or off
+    // whatever the passcode lock is turned on or off
 	BOOL _passcodeLockOn;
-  
-  // whatever the erase data option is turned on or off
+    
+    // whatever the erase data option is turned on or off
 	BOOL _eraseDataOn;
 }
 

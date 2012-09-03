@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,14 +21,14 @@
 @implementation RootViewController
 
 - (IBAction)showPasscode:(id)sender {
-  
-  SettingsViewController* settingsViewController = [[SettingsViewController alloc] 
-                                                     initWithNibName:@"SettingsViewController" bundle:nil];
-  
-  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-  
-  [self presentModalViewController:navController animated:YES];
-  
+    
+    SettingsViewController* settingsViewController = [[SettingsViewController alloc]
+                                                      initWithNibName:@"SettingsViewController" bundle:nil];
+    
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    
+    [self presentModalViewController:navController animated:YES];
+    
 }
 
 

@@ -1,5 +1,5 @@
 //
-// Copyright 2011-2012 Kosher Penguin LLC 
+// Copyright 2011-2012 Kosher Penguin LLC
 // Created by Adar Porat (https://github.com/aporat) on 1/16/2012.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,73 +22,73 @@
 @implementation SettingsViewController
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-  return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) || (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) || (toInterfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)doneButtonPressed:(id)sender {
-  [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
-  self.navigationItem.title = NSLocalizedString(@"Settings", "");
-  
-  
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
-  
-  self.navigationItem.rightBarButtonItem = doneButton;
+    [super viewDidLoad];
+    self.navigationItem.title = NSLocalizedString(@"Settings", "");
+    
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+    
+    self.navigationItem.rightBarButtonItem = doneButton;
 }
 
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  return @"";
+    return @"";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 1;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  static NSString *CellIdentifier = @"Cell";
-  
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-  }
-  
-  if (indexPath.section == 0) {
-    cell.textLabel.text = NSLocalizedString(@"Passcode Lock", "");
-    if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
-      cell.detailTextLabel.text = NSLocalizedString(@"On", "");
-    } else {
-      cell.detailTextLabel.text = NSLocalizedString(@"Off", "");
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  } 
-  return cell;
+    
+    if (indexPath.section == 0) {
+        cell.textLabel.text = NSLocalizedString(@"Passcode Lock", "");
+        if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
+            cell.detailTextLabel.text = NSLocalizedString(@"On", "");
+        } else {
+            cell.detailTextLabel.text = NSLocalizedString(@"Off", "");
+        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section == 0) {
-    KKPasscodeSettingsViewController *vc = [[KKPasscodeSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-  } 
+    if (indexPath.section == 0) {
+        KKPasscodeSettingsViewController *vc = [[KKPasscodeSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didSettingsChanged:(KKPasscodeSettingsViewController*)viewController
 {
-  [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 @end

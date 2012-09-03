@@ -18,9 +18,7 @@
 #import <UIKit/UIKit.h>
 #import "KKPasscodeViewController.h"
 
-@interface RootViewController : UIViewController <KKPasscodeViewControllerDelegate>  {
-
-}
+@interface RootViewController : UIViewController <KKPasscodeViewControllerDelegate>
 
 - (IBAction)showPasscode:(id)sender;
 
