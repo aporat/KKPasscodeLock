@@ -17,11 +17,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define kPasscodeBoxesCount   4
+#define kPasscodeBoxWidth     61.0
+#define kPasscodeBoxHeight    53.0
 
-#define kPasscodeBoxesCount        4
-
-#define kPasscodeBoxWidth        61.0
-#define kPasscodeBoxHeight       53.0
+#define kPasscodeDistanceBetweenBoxes 10.0f
 
 
 // The mode which controls the passcode view behavior
