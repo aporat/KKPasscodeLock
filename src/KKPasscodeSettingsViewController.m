@@ -19,6 +19,7 @@
 #import "KKKeychain.h"
 #import "KKPasscodeViewController.h"
 #import "KKPasscodeLock.h"
+#import "NSBundle+KKPasscodeLockAdditions.h"
 
 
 @implementation KKPasscodeSettingsViewController
@@ -32,7 +33,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.navigationItem.title = NSLocalizedString(@"Passcode Lock", @"");
+	self.navigationItem.title = KKPasscodeLockLocalizedString(@"Passcode Lock", @"");
     
 	_eraseDataSwitch = [[UISwitch alloc] init];
 	[_eraseDataSwitch addTarget:self action:@selector(eraseDataSwitchChanged:) forControlEvents:UIControlEventValueChanged];
@@ -77,9 +78,9 @@
 - (void)eraseDataSwitchChanged:(id)sender
 {
 	if (_eraseDataSwitch.on) {
-		NSString* title = [NSString stringWithFormat:NSLocalizedString(@"All data in this app will be erased after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];
+		NSString* title = [NSString stringWithFormat:KKPasscodeLockLocalizedString(@"All data in this app will be erased after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];
 		
-		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:NSLocalizedString(@"Enable", @"") otherButtonTitles:nil];
+		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:KKPasscodeLockLocalizedString(@"Cancel", @"") destructiveButtonTitle:KKPasscodeLockLocalizedString(@"Enable", @"") otherButtonTitles:nil];
 		[sheet showInView:self.view];
 	} else {
 		_eraseDataOn = NO;
@@ -107,7 +108,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
 	if (section == 2) {
-		return [NSString stringWithFormat:NSLocalizedString(@"Erase all content in the app after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];;
+		return [NSString stringWithFormat:KKPasscodeLockLocalizedString(@"Erase all content in the app after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];;
 	} else {
 		return @"";
 	}
@@ -131,19 +132,19 @@
 	if (indexPath.section == 0) {
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
 		if (_passcodeLockOn) {
-			cell.textLabel.text = NSLocalizedString(@"Turn Passcode Off", @"");
+			cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode Off", @"");
 		} else {
-			cell.textLabel.text = NSLocalizedString(@"Turn Passcode On", @"");
+			cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode On", @"");
 		}
 	} else if (indexPath.section == 1) {
-		cell.textLabel.text = NSLocalizedString(@"Change Passcode", @"");
+		cell.textLabel.text = KKPasscodeLockLocalizedString(@"Change Passcode", @"");
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (!_passcodeLockOn) {
 			cell.textLabel.textColor = [UIColor grayColor];
 		}
 	} else if (indexPath.section == 2) {
-		cell.textLabel.text = NSLocalizedString(@"Erase Data", @"");
+		cell.textLabel.text = KKPasscodeLockLocalizedString(@"Erase Data", @"");
 		cell.accessoryView = _eraseDataSwitch;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (_passcodeLockOn) {
