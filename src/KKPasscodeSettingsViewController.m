@@ -124,12 +124,24 @@
     
     cell.accessoryView = nil;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
     cell.textLabel.textAlignment = UITextAlignmentLeft;
+#else
+    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+#endif
+    
     cell.textLabel.textColor = [UIColor blackColor];
     
 	
 	if (indexPath.section == 0) {
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
+        
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+#else
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+#endif
+        
 		if (_passcodeLockOn) {
 			cell.textLabel.text = NSLocalizedString(@"Turn Passcode Off", @"");
 		} else {
@@ -137,7 +149,13 @@
 		}
 	} else if (indexPath.section == 1) {
 		cell.textLabel.text = NSLocalizedString(@"Change Passcode", @"");
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+#else
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+#endif
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (!_passcodeLockOn) {
 			cell.textLabel.textColor = [UIColor grayColor];
@@ -187,8 +205,11 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
 		}
 		
-		[self.navigationController presentModalViewController:nav animated:YES];
-		
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+        [self.navigationController presentModalViewController:nav animated:YES];
+#else
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+#endif
 		
 	} else if (indexPath.section == 1 && _passcodeLockOn) {
 		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
@@ -210,7 +231,11 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
 		}
 		
-		[self.navigationController presentModalViewController:nav animated:YES];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+        [self.navigationController presentModalViewController:nav animated:YES];
+#else
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+#endif
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
