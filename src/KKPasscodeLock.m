@@ -55,5 +55,19 @@ static KKPasscodeLock *sharedLock = nil;
 	}
 }
 
+- (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value
+{
+    static NSBundle *bundle = nil;
+    if (bundle == nil)
+    {
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"KKPasscodeLock" ofType:@"bundle"];
+        bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
+    }
+    
+    value = [bundle localizedStringForKey:key value:value table:nil];
+    return [[NSBundle mainBundle] localizedStringForKey:key value:value table:nil];
+}
+
+
 
 @end

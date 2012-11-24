@@ -19,7 +19,6 @@
 #import "KKKeychain.h"
 #import "KKPasscodeSettingsViewController.h"
 #import "KKPasscodeLock.h"
-#import "NSBundle+KKPasscodeLockAdditions.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
