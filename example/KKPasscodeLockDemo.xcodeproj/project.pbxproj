@@ -32,6 +32,7 @@
 		5303095E16611BF90004810F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5303097E16611F510004810F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5303097F16611F580004810F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5303098816612A310004810F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D3E344D14C4F54E0003B72B /* KKPasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKPasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3E345114C4F54E0003B72B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D3E345314C4F54E0003B72B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -216,6 +217,7 @@
 				en,
 				nl,
 				de,
+				he,
 			);
 			mainGroup = 6D3E344214C4F54D0003B72B;
 			productRefGroup = 6D3E344E14C4F54E0003B72B /* Products */;
@@ -267,6 +269,7 @@
 				6D3E345B14C4F54E0003B72B /* en */,
 				5303097E16611F510004810F /* nl */,
 				5303097F16611F580004810F /* de */,
+				5303098816612A310004810F /* he */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
