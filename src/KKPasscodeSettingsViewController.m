@@ -19,7 +19,6 @@
 #import "KKKeychain.h"
 #import "KKPasscodeViewController.h"
 #import "KKPasscodeLock.h"
-#import "NSBundle+KKPasscodeLockAdditions.h"
 
 
 @implementation KKPasscodeSettingsViewController
@@ -156,6 +155,7 @@
 #else
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
 #endif
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (!_passcodeLockOn) {
 			cell.textLabel.textColor = [UIColor grayColor];

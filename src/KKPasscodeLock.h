@@ -15,8 +15,11 @@
 // limitations under the License.
 //
 
+#define KKPasscodeLockLocalizedString(key, comment) [[KKPasscodeLock sharedLock] localizedStringForKey:(key) value:@""]
+
 #import <Foundation/Foundation.h>
 #import "KKPasscodeViewController.h"
+
 
 @interface KKPasscodeLock : NSObject {
     
@@ -37,6 +40,10 @@
  */
 - (BOOL)isPasscodeRequired;
 
+/**
+ * returns a localized string from the framework's bundle
+ */
+- (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value NS_FORMAT_ARGUMENT(1);
 
 /**
  * set the initial settings of the passcode settings
