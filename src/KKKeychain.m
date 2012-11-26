@@ -50,21 +50,21 @@
 	[existsQueryDictionary setObject:@"service" forKey:(__bridge id)kSecAttrService];
 	[existsQueryDictionary setObject:key forKey:(__bridge id)kSecAttrAccount];
     
-    OSStatus res = SecItemCopyMatching((__bridge_retained CFDictionaryRef) existsQueryDictionary, NULL);
+    OSStatus res = SecItemCopyMatching((__bridge CFDictionaryRef) existsQueryDictionary, NULL);
     
 	if (res == errSecItemNotFound) {
 		if (string != nil) {
 			NSMutableDictionary *addDict = existsQueryDictionary;
 			[addDict setObject:data forKey:(__bridge id)kSecValueData];
             
-			res = SecItemAdd((__bridge_retained CFDictionaryRef)addDict, NULL);
+			res = SecItemAdd((__bridge CFDictionaryRef)addDict, NULL);
 			NSAssert1(res == errSecSuccess, @"Recieved %ld from SecItemAdd!", res);
 		}
 	} else if (res == errSecSuccess) {
 		// Modify an existing one
 		// Actually pull it now of the keychain at this point.
 		NSDictionary *attributeDict = [NSDictionary dictionaryWithObject:data forKey:(__bridge id)kSecValueData];
-		res = SecItemUpdate((__bridge_retained CFDictionaryRef)existsQueryDictionary, (__bridge_retained CFDictionaryRef)attributeDict);
+		res = SecItemUpdate((__bridge CFDictionaryRef)existsQueryDictionary, (__bridge CFDictionaryRef)attributeDict);
 		NSAssert1(res == errSecSuccess, @"SecItemUpdated returned %ld!", res);
 	} else {
 		NSAssert1(NO, @"Received %ld from SecItemCopyMatching!", res);
