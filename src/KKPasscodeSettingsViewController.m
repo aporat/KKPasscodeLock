@@ -187,10 +187,10 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
 		}
 		
-		[self.delegate passcodeLockWillBePresented];
-    
+		if ([self.delegate respondsToSelector:@selector(passcodeLockWillBePresented)]) {
+		  [self.delegate passcodeLockWillBePresented];
+	  }
 		[self.navigationController presentModalViewController:nav animated:YES];
-		
 		
 	} else if (indexPath.section == 1 && _passcodeLockOn) {
 		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
@@ -212,8 +212,9 @@
 			nav.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;		
 		}
 		
-		[self.delegate passcodeLockWillBePresented];
-    
+		if ([self.delegate respondsToSelector:@selector(passcodeLockWillBePresented)]) {
+		  [self.delegate passcodeLockWillBePresented];
+	  }
 		[self.navigationController presentModalViewController:nav animated:YES];
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
