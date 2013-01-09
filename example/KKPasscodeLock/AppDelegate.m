@@ -48,6 +48,7 @@
     if ([[KKPasscodeLock sharedLock] isPasscodeRequired]) {
         KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
         vc.mode = KKPasscodeModeEnter;
+        vc.inputMode = KKPasscodeInputModeFreeText;
         vc.delegate = self;
         
         dispatch_async(dispatch_get_main_queue(),^ {

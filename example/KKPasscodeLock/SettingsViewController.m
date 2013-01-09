@@ -82,6 +82,7 @@
     if (indexPath.section == 0) {
         KKPasscodeSettingsViewController *vc = [[KKPasscodeSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
         vc.delegate = self;
+        vc.inputMode = KKPasscodeInputModeFreeText;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

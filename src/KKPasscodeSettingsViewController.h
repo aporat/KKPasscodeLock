@@ -44,8 +44,11 @@
     
     // whatever the erase data option is turned on or off
 	BOOL _eraseDataOn;
+    
+    KKPasscodeInputMode _inputMode;
 }
 
 @property (nonatomic, unsafe_unretained) id <KKPasscodeSettingsViewControllerDelegate> delegate;
+@property (nonatomic, assign) KKPasscodeInputMode inputMode;
 
 @end

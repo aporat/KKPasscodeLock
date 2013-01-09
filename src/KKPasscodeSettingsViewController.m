@@ -25,6 +25,7 @@
 
 
 @synthesize delegate = _delegate;
+@synthesize inputMode = _inputMode;
 
 #pragma mark -
 #pragma mark UIViewController methods
@@ -191,6 +192,8 @@
 		} else {
 			vc.mode = KKPasscodeModeSet;
 		}
+        
+        vc.inputMode = _inputMode;
 		
 		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         
@@ -216,6 +219,7 @@
 		vc.delegate = self;
 		
 		vc.mode = KKPasscodeModeChange;
+        vc.inputMode = _inputMode;
 		
 		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 		
