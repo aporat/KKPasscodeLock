@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5303095F16611BF90004810F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5303095E16611BF90004810F /* Default-568h@2x.png */; };
+		53DD2F8816A79FDB002582A0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 53DD2F8616A79FDB002582A0 /* Default.png */; };
+		53DD2F8916A79FDB002582A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53DD2F8716A79FDB002582A0 /* Default@2x.png */; };
 		6D3E345214C4F54E0003B72B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E345114C4F54E0003B72B /* UIKit.framework */; };
 		6D3E345414C4F54E0003B72B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E345314C4F54E0003B72B /* Foundation.framework */; };
 		6D3E345614C4F54E0003B72B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E345514C4F54E0003B72B /* CoreGraphics.framework */; };
@@ -33,6 +35,8 @@
 		5303097E16611F510004810F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5303097F16611F580004810F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5303098816612A310004810F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		53DD2F8616A79FDB002582A0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		53DD2F8716A79FDB002582A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6D3E344D14C4F54E0003B72B /* KKPasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKPasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3E345114C4F54E0003B72B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D3E345314C4F54E0003B72B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -106,6 +110,8 @@
 		6D3E344214C4F54D0003B72B = {
 			isa = PBXGroup;
 			children = (
+				53DD2F8616A79FDB002582A0 /* Default.png */,
+				53DD2F8716A79FDB002582A0 /* Default@2x.png */,
 				5303095E16611BF90004810F /* Default-568h@2x.png */,
 				6D3E345714C4F54E0003B72B /* KKPasscodeLock */,
 				6D2F0BD414C51CCA00C1862D /* Demo App */,
@@ -239,6 +245,8 @@
 				6DF13A5C14C686FC0069BBA5 /* SettingsViewController.xib in Resources */,
 				6DFE33F714CF879E00E6EEA4 /* KKPasscodeLock.bundle in Resources */,
 				5303095F16611BF90004810F /* Default-568h@2x.png in Resources */,
+				53DD2F8816A79FDB002582A0 /* Default.png in Resources */,
+				53DD2F8916A79FDB002582A0 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

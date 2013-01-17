@@ -295,6 +295,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
 				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = KKPasscodeLock;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -311,6 +312,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
 				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = KKPasscodeLock;
 				WRAPPER_EXTENSION = octest;
 			};
