@@ -93,20 +93,24 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 	if ([[KKPasscodeLock sharedLock] eraseOption]) {
-		return 3;
+		return 2;
 	}
 	
-	return 2;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section==0) {
+        return 2;
+    }
+    
 	return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-	if (section == 2) {
+	if (section == 1) {
 		return [NSString stringWithFormat:KKPasscodeLockLocalizedString(@"Erase all content in the app after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];;
 	} else {
 		return @"";
@@ -136,31 +140,35 @@
 	
 	if (indexPath.section == 0) {
         
+        if (indexPath.row == 0) {
+            
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
 #else
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
 #endif
-        
-		if (_passcodeLockOn) {
-			cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode Off", @"");
-		} else {
-			cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode On", @"");
-		}
+            
+            if (_passcodeLockOn) {
+                cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode Off", @"");
+            } else {
+                cell.textLabel.text = KKPasscodeLockLocalizedString(@"Turn Passcode On", @"");
+            }
+        } else {
+            cell.textLabel.text = KKPasscodeLockLocalizedString(@"Change Passcode", @"");
+            
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
+#else
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+#endif
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (!_passcodeLockOn) {
+                cell.textLabel.textColor = [UIColor grayColor];
+            }
+            
+        }
 	} else if (indexPath.section == 1) {
-		cell.textLabel.text = KKPasscodeLockLocalizedString(@"Change Passcode", @"");
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
-#else
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-#endif
-
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		if (!_passcodeLockOn) {
-			cell.textLabel.textColor = [UIColor grayColor];
-		}
-	} else if (indexPath.section == 2) {
 		cell.textLabel.text = KKPasscodeLockLocalizedString(@"Erase Data", @"");
 		cell.accessoryView = _eraseDataSwitch;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;

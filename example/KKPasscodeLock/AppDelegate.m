@@ -29,6 +29,7 @@
 {
     
     [[KKPasscodeLock sharedLock] setDefaultSettings];
+    [KKPasscodeLock sharedLock].eraseOption = NO;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
