@@ -51,6 +51,20 @@ enum {
 };
 typedef NSUInteger KKPasscodeMode;
 
+// the input mode
+enum {
+    /**
+     * 4-digit passcode input
+     */
+    KKPasscodeInputModeDefault = 0,
+    
+    /**
+     * Free-text passcode input
+     */
+    KKPasscodeInputModeFreeText = 1
+};
+typedef NSUInteger KKPasscodeInputMode;
+
 
 @class KKPasscodeViewController;
 
@@ -87,7 +101,7 @@ typedef NSUInteger KKPasscodeMode;
     // array of passcode entry text fields
 	NSMutableArray* _textFields;
     
-	NSMutableArray* _boxes;
+ 	NSMutableArray* _boxes;
 	
 	UITableView* _enterPasscodeTableView;
 	UITextField* _enterPasscodeTextField;
@@ -100,6 +114,7 @@ typedef NSUInteger KKPasscodeMode;
 	
     // readwrite override for passlock mode
 	KKPasscodeMode _mode;
+    KKPasscodeInputMode _inputMode;
 	
     // whatever the passcode lock is turned on or off
 	BOOL _passcodeLockOn;
@@ -114,7 +129,7 @@ typedef NSUInteger KKPasscodeMode;
 
 @property (nonatomic, unsafe_unretained) id <KKPasscodeViewControllerDelegate> delegate;
 @property (nonatomic, assign) KKPasscodeMode mode;
-
+@property (nonatomic, assign) KKPasscodeInputMode inputMode;
 
 @end
 

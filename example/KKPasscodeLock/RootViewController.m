@@ -20,6 +20,10 @@
 
 @implementation RootViewController
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) || (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
 - (IBAction)showPasscode:(id)sender {
     
     SettingsViewController* settingsViewController = [[SettingsViewController alloc]
