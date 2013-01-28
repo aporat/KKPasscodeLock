@@ -135,7 +135,7 @@
         self.navigationItem.title = KKPasscodeLockLocalizedString(@"Enter Passcode", @"");
     }
     
-    
+    CGFloat totalBoxesWidth = (71.0 * kPasscodeBoxesCount) - 10.0;
     
 	if (_mode == KKPasscodeModeSet || _mode == KKPasscodeModeChange) {
 		if (_passcodeLockOn) {
@@ -143,7 +143,7 @@
 			[_tableViews addObject:_enterPasscodeTableView];
 			[_textFields addObject:_enterPasscodeTextField];
 			[_boxes addObject:[self boxes]];
-			UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
+			UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - totalBoxesWidth) * 0.5, 0, totalBoxesWidth, kPasscodeBoxHeight)];
 			boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 			for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 				[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -156,7 +156,7 @@
 		[_tableViews addObject:_setPasscodeTableView];
 		[_textFields addObject:_setPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
+		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - totalBoxesWidth) * 0.5, 0, totalBoxesWidth, kPasscodeBoxHeight)];
 		boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -167,7 +167,7 @@
 		[_tableViews addObject:_confirmPasscodeTableView];
 		[_textFields addObject:_confirmPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesConfirmView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
+		UIView *boxesConfirmView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - totalBoxesWidth) * 0.5, 0, totalBoxesWidth, kPasscodeBoxHeight)];
 		boxesConfirmView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesConfirmView addSubview:[[_boxes lastObject] objectAtIndex:i]];
@@ -178,7 +178,7 @@
 		[_tableViews addObject:_enterPasscodeTableView];
 		[_textFields addObject:_enterPasscodeTextField];
 		[_boxes addObject:[self boxes]];
-		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width * 0.5 - 71.0 * kPasscodeBoxesCount * 0.5, 0, 71.0 * kPasscodeBoxesCount, kPasscodeBoxHeight)];
+		UIView *boxesView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - totalBoxesWidth) * 0.5, 0, totalBoxesWidth, kPasscodeBoxHeight)];
 		boxesView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		for (int i = 0; i < [[_boxes lastObject] count]; i++) {
 			[boxesView addSubview:[[_boxes lastObject] objectAtIndex:i]];
