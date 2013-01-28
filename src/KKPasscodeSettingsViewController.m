@@ -189,7 +189,7 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	if (indexPath.section == 0) {
+	if (indexPath.section == 0 && indexPath.row == 0) {
 		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil
                                                                                   bundle:nil];
 		vc.delegate = self;
@@ -219,7 +219,7 @@
         [self.navigationController presentViewController:nav animated:YES completion:nil];
 #endif
 		
-	} else if (indexPath.section == 1 && _passcodeLockOn) {
+	} else if (indexPath.section == 0 && indexPath.row == 1 && _passcodeLockOn) {
 		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
 		vc.delegate = self;
 		
