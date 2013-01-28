@@ -108,24 +108,24 @@
     
     
     if (_mode == KKPasscodeModeSet) {
-        self.navigationItem.title = NSLocalizedString(@"Set Passcode", @"");
+        self.navigationItem.title = NSLocalizedString(@"Set Passcode", @"KK-PASSCODE ");
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                               target:self
                                                                                               action:@selector(cancelButtonPressed:)];
     } else if (_mode == KKPasscodeModeChange) {
-        self.navigationItem.title = NSLocalizedString(@"Change Passcode", @"");
+        self.navigationItem.title = NSLocalizedString(@"Change Passcode", @"KK-PASSCODE ");
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                               target:self
                                                                                               action:@selector(cancelButtonPressed:)];
         
     } else if (_mode == KKPasscodeModeDisabled) {
-        self.navigationItem.title = NSLocalizedString(@"Turn off Passcode", @"");
+        self.navigationItem.title = NSLocalizedString(@"Turn off Passcode", @"KK-PASSCODE ");
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                               target:self
                                                                                               action:@selector(cancelButtonPressed:)];
         
     } else {
-        self.navigationItem.title = NSLocalizedString(@"Enter Passcode", @"");
+        self.navigationItem.title = NSLocalizedString(@"Enter Passcode", @"KK-PASSCODE ");
     }
   
   // Calculate any positioning and size related to where the boxes are.
@@ -248,7 +248,7 @@
 	
 	_failedAttemptsCount += 1;
 	if (_failedAttemptsCount == 1) {
-		_failedAttemptsLabel.text = NSLocalizedString(@"1 Failed Passcode Attempt", @"");
+		_failedAttemptsLabel.text = NSLocalizedString(@"1 Failed Passcode Attempt", @"KK-PASSCODE ");
 	} else {
 		_failedAttemptsLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%i Failed Passcode Attempts", @""), _failedAttemptsCount];
 	}
@@ -350,7 +350,7 @@
 				if (![_confirmPasscodeTextField.text isEqualToString:_setPasscodeTextField.text]) {
 					_confirmPasscodeTextField.text = @"";
 					_setPasscodeTextField.text = @"";
-					_passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"");
+					_passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"KK-PASSCODE ");
 					[self moveToPreviousTableView];
 				} else {
 					if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
@@ -375,7 +375,7 @@
 			} else if ([textField isEqual:_setPasscodeTextField]) {
 				if ([passcode isEqualToString:_setPasscodeTextField.text]) {
 					_setPasscodeTextField.text = @"";
-					_passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"");
+					_passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"KK-PASSCODE ");
 					_passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
 				} else {
 					_passcodeConfirmationWarningLabel.text = @"";
@@ -453,7 +453,7 @@
                 for (int i = 0; i < kPasscodeBoxesCount; i++) {
                     [[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"MTPasscodeLock.bundle/box_empty.png"]];
                 }
-                _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Enter a different passcode. Cannot re-use the same passcode.", @"");
+                _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Enter a different passcode. Cannot re-use the same passcode.", @"KK-PASSCODE ");
                 _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
             } else {
                 _passcodeConfirmationWarningLabel.text = @"";
@@ -464,7 +464,7 @@
             if (![_confirmPasscodeTextField.text isEqualToString:_setPasscodeTextField.text]) {
                 _confirmPasscodeTextField.text = @"";
                 _setPasscodeTextField.text = @"";
-                _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"");
+                _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"KK-PASSCODE ");
                 [self moveToPreviousTableView];
             } else {
                 if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
@@ -484,7 +484,7 @@
         if (![_confirmPasscodeTextField.text isEqualToString:_setPasscodeTextField.text]) {
             _confirmPasscodeTextField.text = @"";
             _setPasscodeTextField.text = @"";
-            _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"");
+            _passcodeConfirmationWarningLabel.text = NSLocalizedString(@"Passcodes did not match. Try again.", @"KK-PASSCODE ");
             [self moveToPreviousTableView];
         } else {
             if ([KKKeychain setString:_setPasscodeTextField.text forKey:@"passcode"]) {
@@ -559,24 +559,24 @@
 	
 	if (_mode == KKPasscodeModeSet) {
 		if ([textField isEqual:_enterPasscodeTextField]) {
-			headerLabel.text = NSLocalizedString(@"Enter your passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Enter your passcode", @"KK-PASSCODE ");
 		} else if ([textField isEqual:_setPasscodeTextField]) {
-			headerLabel.text = NSLocalizedString(@"Enter a passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Enter a passcode", @"KK-PASSCODE ");
 		} else if ([textField isEqual:_confirmPasscodeTextField]) {
-			headerLabel.text = NSLocalizedString(@"Re-enter your passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Re-enter your passcode", @"KK-PASSCODE ");
 		}
 	} else if (_mode == KKPasscodeModeDisabled) {
-		headerLabel.text = NSLocalizedString(@"Enter your passcode", @"");
+		headerLabel.text = NSLocalizedString(@"Enter your passcode", @"KK-PASSCODE ");
 	} else if (_mode == KKPasscodeModeChange) {
 		if ([textField isEqual:_enterPasscodeTextField]) {
-			headerLabel.text = NSLocalizedString(@"Enter your old passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Enter your old passcode", @"KK-PASSCODE ");
 		} else if ([textField isEqual:_setPasscodeTextField]) {
-			headerLabel.text = NSLocalizedString(@"Enter your new passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Enter your new passcode", @"KK-PASSCODE ");
 		} else {
-			headerLabel.text = NSLocalizedString(@"Re-enter your new passcode", @"");
+			headerLabel.text = NSLocalizedString(@"Re-enter your new passcode", @"KK-PASSCODE ");
 		}
 	} else {
-		headerLabel.text = NSLocalizedString(@"Enter your passcode", @"");
+		headerLabel.text = NSLocalizedString(@"Enter your passcode", @"KK-PASSCODE ");
 	}
     
 	headerLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
