@@ -55,8 +55,18 @@
 	[super loadView];
 	
 	self.view.backgroundColor = [UIColor whiteColor];
+    
+    CGRect tableViewFrame = self.view.bounds;
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad && [[UIScreen mainScreen] bounds].size.height > 480) {
+        // is running on device with 4" screen so add background tableView
+        UITableView *backgroundTableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
+        [self.view addSubview:backgroundTableView];
+        
+        //and move other tableViews down so boxes are vertically centered
+        tableViewFrame.origin.y += 44.0;
+    }
 	
-	_enterPasscodeTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+	_enterPasscodeTableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
 	_enterPasscodeTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_enterPasscodeTableView.delegate = self;
 	_enterPasscodeTableView.dataSource = self;
@@ -64,7 +74,7 @@
 	_enterPasscodeTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	[self.view addSubview:_enterPasscodeTableView];
 	
-	_setPasscodeTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+	_setPasscodeTableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
 	_setPasscodeTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_setPasscodeTableView.delegate = self;
 	_setPasscodeTableView.dataSource = self;
@@ -72,7 +82,7 @@
 	_setPasscodeTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	[self.view addSubview:_setPasscodeTableView];
 	
-	_confirmPasscodeTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+	_confirmPasscodeTableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
 	_confirmPasscodeTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_confirmPasscodeTableView.delegate = self;
 	_confirmPasscodeTableView.dataSource = self;
