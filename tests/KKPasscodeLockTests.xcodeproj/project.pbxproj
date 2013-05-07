@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5303097416611E650004810F /* KKPasscodeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5303096916611E650004810F /* KKPasscodeSettingsViewController.m */; };
+		5303097516611E650004810F /* KKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5303096A16611E650004810F /* KKPasscodeViewController.m */; };
+		5303097716611E650004810F /* KKPasscodeLock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5303096D16611E650004810F /* KKPasscodeLock.bundle */; };
+		5303097816611E650004810F /* KKKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 5303096F16611E650004810F /* KKKeychain.m */; };
+		5303097916611E650004810F /* KKPasscodeLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5303097016611E650004810F /* KKPasscodeLock.m */; };
 		6D2394C81548CA89004DF3B7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394C71548CA89004DF3B7 /* SenTestingKit.framework */; };
 		6D2394CA1548CA89004DF3B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394C91548CA89004DF3B7 /* UIKit.framework */; };
 		6D2394CB1548CA89004DF3B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394B91548CA89004DF3B7 /* Foundation.framework */; };
 		6D2394D41548CA89004DF3B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D2394D21548CA89004DF3B7 /* InfoPlist.strings */; };
 		6D2394D71548CA89004DF3B7 /* KKPasscodeLockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394D61548CA89004DF3B7 /* KKPasscodeLockTests.m */; };
-		6D2394E91548CAA8004DF3B7 /* KKPasscodeLock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */; };
-		6D2394EC1548CAA8004DF3B7 /* KKKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E21548CAA8004DF3B7 /* KKKeychain.m */; };
-		6D2394EF1548CAA8004DF3B7 /* KKPasscodeLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */; };
-		6D2394F21548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */; };
-		6D2394F51548CAA8004DF3B7 /* KKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */; };
 		6D2394F81548CBAA004DF3B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394F61548CBAA004DF3B7 /* AudioToolbox.framework */; };
 		6D2394F91548CBAA004DF3B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394F71548CBAA004DF3B7 /* CoreGraphics.framework */; };
 		6D2394FB1548CBAE004DF3B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2394FA1548CBAE004DF3B7 /* Security.framework */; };
@@ -24,6 +24,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5303096916611E650004810F /* KKPasscodeSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPasscodeSettingsViewController.m; path = ../../src/KKPasscodeSettingsViewController.m; sourceTree = "<group>"; };
+		5303096A16611E650004810F /* KKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPasscodeViewController.m; path = ../../src/KKPasscodeViewController.m; sourceTree = "<group>"; };
+		5303096D16611E650004810F /* KKPasscodeLock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KKPasscodeLock.bundle; path = ../../src/KKPasscodeLock.bundle; sourceTree = "<group>"; };
+		5303096E16611E650004810F /* KKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeViewController.h; path = ../../src/KKPasscodeViewController.h; sourceTree = "<group>"; };
+		5303096F16611E650004810F /* KKKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKKeychain.m; path = ../../src/KKKeychain.m; sourceTree = "<group>"; };
+		5303097016611E650004810F /* KKPasscodeLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPasscodeLock.m; path = ../../src/KKPasscodeLock.m; sourceTree = "<group>"; };
+		5303097116611E650004810F /* KKPasscodeLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeLock.h; path = ../../src/KKPasscodeLock.h; sourceTree = "<group>"; };
+		5303097216611E650004810F /* KKKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKKeychain.h; path = ../../src/KKKeychain.h; sourceTree = "<group>"; };
+		5303097316611E650004810F /* KKPasscodeSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeSettingsViewController.h; path = ../../src/KKPasscodeSettingsViewController.h; sourceTree = "<group>"; };
 		6D2394B91548CA89004DF3B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D2394BD1548CA89004DF3B7 /* KKPasscodeLock-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KKPasscodeLock-Prefix.pch"; sourceTree = "<group>"; };
 		6D2394C61548CA89004DF3B7 /* KKPasscodeLock.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KKPasscodeLock.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,15 +42,6 @@
 		6D2394D31548CA89004DF3B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D2394D51548CA89004DF3B7 /* KKPasscodeLockTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKPasscodeLockTests.h; sourceTree = "<group>"; };
 		6D2394D61548CA89004DF3B7 /* KKPasscodeLockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKPasscodeLockTests.m; sourceTree = "<group>"; };
-		6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KKPasscodeLock.bundle; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.bundle; sourceTree = "<absolute>"; };
-		6D2394E11548CAA8004DF3B7 /* KKKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKKeychain.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKKeychain.h; sourceTree = "<absolute>"; };
-		6D2394E21548CAA8004DF3B7 /* KKKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKKeychain.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKKeychain.m; sourceTree = "<absolute>"; };
-		6D2394E31548CAA8004DF3B7 /* KKPasscodeLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeLock.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.h; sourceTree = "<absolute>"; };
-		6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeLock.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeLock.m; sourceTree = "<absolute>"; };
-		6D2394E51548CAA8004DF3B7 /* KKPasscodeSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeSettingsViewController.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeSettingsViewController.h; sourceTree = "<absolute>"; };
-		6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeSettingsViewController.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeSettingsViewController.m; sourceTree = "<absolute>"; };
-		6D2394E71548CAA8004DF3B7 /* KKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPasscodeViewController.h; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeViewController.h; sourceTree = "<absolute>"; };
-		6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KKPasscodeViewController.m; path = /Users/hadarporat/Desktop/projects/KKPasscodeLock/example/KKPasscodeLock/../../src/KKPasscodeViewController.m; sourceTree = "<absolute>"; };
 		6D2394F61548CBAA004DF3B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6D2394F71548CBAA004DF3B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6D2394FA1548CBAE004DF3B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -101,15 +101,15 @@
 		6D2394BB1548CA89004DF3B7 /* KKPasscodeLock */ = {
 			isa = PBXGroup;
 			children = (
-				6D2394E01548CAA8004DF3B7 /* KKPasscodeLock.bundle */,
-				6D2394E11548CAA8004DF3B7 /* KKKeychain.h */,
-				6D2394E21548CAA8004DF3B7 /* KKKeychain.m */,
-				6D2394E31548CAA8004DF3B7 /* KKPasscodeLock.h */,
-				6D2394E41548CAA8004DF3B7 /* KKPasscodeLock.m */,
-				6D2394E51548CAA8004DF3B7 /* KKPasscodeSettingsViewController.h */,
-				6D2394E61548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m */,
-				6D2394E71548CAA8004DF3B7 /* KKPasscodeViewController.h */,
-				6D2394E81548CAA8004DF3B7 /* KKPasscodeViewController.m */,
+				5303096916611E650004810F /* KKPasscodeSettingsViewController.m */,
+				5303096A16611E650004810F /* KKPasscodeViewController.m */,
+				5303096D16611E650004810F /* KKPasscodeLock.bundle */,
+				5303096E16611E650004810F /* KKPasscodeViewController.h */,
+				5303096F16611E650004810F /* KKKeychain.m */,
+				5303097116611E650004810F /* KKPasscodeLock.h */,
+				5303097016611E650004810F /* KKPasscodeLock.m */,
+				5303097216611E650004810F /* KKKeychain.h */,
+				5303097316611E650004810F /* KKPasscodeSettingsViewController.h */,
 				6D2394BC1548CA89004DF3B7 /* Supporting Files */,
 			);
 			path = KKPasscodeLock;
@@ -195,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2394D41548CA89004DF3B7 /* InfoPlist.strings in Resources */,
-				6D2394E91548CAA8004DF3B7 /* KKPasscodeLock.bundle in Resources */,
+				5303097716611E650004810F /* KKPasscodeLock.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,10 +223,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2394D71548CA89004DF3B7 /* KKPasscodeLockTests.m in Sources */,
-				6D2394EC1548CAA8004DF3B7 /* KKKeychain.m in Sources */,
-				6D2394EF1548CAA8004DF3B7 /* KKPasscodeLock.m in Sources */,
-				6D2394F21548CAA8004DF3B7 /* KKPasscodeSettingsViewController.m in Sources */,
-				6D2394F51548CAA8004DF3B7 /* KKPasscodeViewController.m in Sources */,
+				5303097416611E650004810F /* KKPasscodeSettingsViewController.m in Sources */,
+				5303097516611E650004810F /* KKPasscodeViewController.m in Sources */,
+				5303097816611E650004810F /* KKKeychain.m in Sources */,
+				5303097916611E650004810F /* KKPasscodeLock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +295,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
 				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = KKPasscodeLock;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -311,6 +312,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KKPasscodeLock/KKPasscodeLock-Prefix.pch";
 				INFOPLIST_FILE = "KKPasscodeLockTests/KKPasscodeLock-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = KKPasscodeLock;
 				WRAPPER_EXTENSION = octest;
 			};

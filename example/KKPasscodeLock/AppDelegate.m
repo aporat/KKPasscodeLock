@@ -29,6 +29,7 @@
 {
     
     [[KKPasscodeLock sharedLock] setDefaultSettings];
+    [KKPasscodeLock sharedLock].eraseOption = NO;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -36,7 +37,7 @@
     RootViewController* vc = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.window addSubview:_navigationController.view];
+    [self.window setRootViewController:_navigationController];
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -64,7 +65,7 @@
                 nav.navigationBar.barStyle = _navigationController.navigationBar.barStyle;
             }
             
-            [_navigationController presentModalViewController:nav animated:YES];
+            [_navigationController presentModalViewController:nav animated:NO];
         });
         
     }
