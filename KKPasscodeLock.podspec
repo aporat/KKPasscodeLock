@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.platform = :ios
   s.source_files = 'src/*.{h,m}'
   s.resources = "src/KKPasscodeLock.bundle"
-  s.clean_paths = "Classes", "*.{plist,pch,md,m,xcodeproj}", "SampleApp"
   s.frameworks = 'QuartzCore', 'AudioToolbox', 'Security'
   s.requires_arc = true
 end
