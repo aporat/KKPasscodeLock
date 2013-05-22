@@ -53,12 +53,17 @@ static KKPasscodeLock *sharedLock = nil;
 	if (![KKKeychain getStringForKey:@"erase_data_on"]) {
 		[KKKeychain setString:@"NO" forKey:@"erase_data_on"];
 	}
+    
+    if (![KKKeychain getStringForKey:@"failedAttemptsCount"]) {
+		[KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
+	}
 }
 
 - (void)resetSettings
 {
     [KKKeychain setString:@"NO" forKey:@"passcode_on"];
     [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
+    [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
 }
 
 - (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value

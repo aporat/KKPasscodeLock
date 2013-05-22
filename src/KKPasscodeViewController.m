@@ -259,7 +259,12 @@
 		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
 	}
 	
-	_failedAttemptsCount += 1;
+    NSInteger _failedAttemptsCount = [[KKKeychain getStringForKey:@"failedAttemptsCount"] integerValue];
+    
+    _failedAttemptsCount++;
+    
+    [KKKeychain setString:[NSString stringWithFormat:@"%d", _failedAttemptsCount] forKey:@"failedAttemptsCount"];
+
 	if (_failedAttemptsCount == 1) {
 		_failedAttemptsLabel.text = KKPasscodeLockLocalizedString(@"1 Failed Passcode Attempt", @"");
 	} else {
@@ -292,6 +297,8 @@
 				[_delegate didPasscodeEnteredIncorrectly:self];
 			}
 		}
+        
+        [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
 	}
 	
 }
@@ -459,6 +466,8 @@
             if ([_delegate respondsToSelector:@selector(didPasscodeEnteredCorrectly:)]) {
                 [_delegate performSelector:@selector(didPasscodeEnteredCorrectly:) withObject:self];
             }
+            
+            [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
             [self dismissModalViewControllerAnimated:YES];
