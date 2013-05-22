@@ -50,6 +50,11 @@
  */
 - (void)setDefaultSettings;
 
+/**
+ * reset the passcode settings
+ */
+- (void)resetSettings;
+
 @property (nonatomic,assign) BOOL eraseOption;
 
 @property (nonatomic,assign) NSUInteger attemptsAllowed;
