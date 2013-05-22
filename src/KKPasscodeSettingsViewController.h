@@ -49,5 +49,5 @@
 @property (nonatomic) Class passcodeViewControllerClass;
 
 @property (nonatomic, unsafe_unretained) id <KKPasscodeSettingsViewControllerDelegate> delegate;
-
+@property (nonatomic, unsafe_unretained) id <KKPasscodeViewControllerDelegate> passcodeViewControllerDelegate;
 @end
