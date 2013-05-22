@@ -27,6 +27,51 @@
 @synthesize delegate = _delegate;
 
 #pragma mark -
+#pragma mark Properties
+
+- (void)setPasscodeViewControllerClass:(Class)passcodeViewControllerClass
+{
+    if ([passcodeViewControllerClass isSubclassOfClass:[KKPasscodeViewController class]]) {
+        _passcodeViewControllerClass = passcodeViewControllerClass;
+    }
+}
+
+#pragma mark -
+#pragma mark Initialization
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:style]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+#pragma mark -
 #pragma mark UIViewController methods
 
 - (void)viewDidLoad
@@ -190,8 +235,8 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 	if (indexPath.section == 0 && indexPath.row == 0) {
-		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil
-                                                                                  bundle:nil];
+		KKPasscodeViewController* vc = [[self.passcodeViewControllerClass alloc] initWithNibName:nil
+                                                                                          bundle:nil];
 		vc.delegate = self;
 		
 		if (_passcodeLockOn) {
@@ -220,7 +265,7 @@
 #endif
 		
 	} else if (indexPath.section == 0 && indexPath.row == 1 && _passcodeLockOn) {
-		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
+		KKPasscodeViewController *vc = [[self.passcodeViewControllerClass alloc] initWithNibName:nil bundle:nil];
 		vc.delegate = self;
 		
 		vc.mode = KKPasscodeModeChange;
