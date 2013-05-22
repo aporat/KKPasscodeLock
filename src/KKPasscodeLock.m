@@ -55,6 +55,12 @@ static KKPasscodeLock *sharedLock = nil;
 	}
 }
 
+- (void)resetSettings
+{
+    [KKKeychain setString:@"NO" forKey:@"passcode_on"];
+    [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
+}
+
 - (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value
 {
     static NSBundle *bundle = nil;
