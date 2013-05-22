@@ -294,6 +294,34 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)didPasscodeEnteredCorrectly:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didPasscodeEnteredCorrectly:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didPasscodeEnteredCorrectly:) withObject:viewController];
+	}
+}
+
+- (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didPasscodeEnteredIncorrectly:) withObject:viewController];
+	}
+}
+
+- (void)shouldLockApplication:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(shouldLockApplication:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(shouldLockApplication:) withObject:viewController];
+	}
+}
+
+- (void)shouldEraseApplicationData:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(shouldEraseApplicationData:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(shouldEraseApplicationData:) withObject:viewController];
+	}
+}
+
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController
 {
 	_passcodeLockOn = [[KKKeychain getStringForKey:@"passcode_on"] isEqualToString:@"YES"];
@@ -305,7 +333,10 @@
 	if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
 		[_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
 	}
-	
+
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didSettingsChanged:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didSettingsChanged:) withObject:viewController];
+	}
 }
 
 
