@@ -161,9 +161,9 @@
 #else
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
 #endif
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             if (!_passcodeLockOn) {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.textColor = [UIColor grayColor];
             }
             
@@ -244,8 +244,9 @@
 #else
         [self.navigationController presentViewController:nav animated:YES completion:nil];
 #endif
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController
