@@ -46,6 +46,8 @@
 	BOOL _eraseDataOn;
 }
 
+@property (nonatomic) Class passcodeViewControllerClass;
+
 @property (nonatomic, unsafe_unretained) id <KKPasscodeSettingsViewControllerDelegate> delegate;
 
 @end
