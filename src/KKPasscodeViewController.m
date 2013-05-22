@@ -296,6 +296,12 @@
 			if ([_delegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
 				[_delegate didPasscodeEnteredIncorrectly:self];
 			}
+            
+            [KKKeychain setString:[[KKPasscodeLock sharedLock].dateFormatter stringFromDate:[NSDate date]] forKey:@"incorrect_passcode_datetime"];
+            
+            if ([_delegate respondsToSelector:@selector(shouldLockApplication:)]) {
+				[_delegate shouldLockApplication:self];
+			}
 		}
         
         [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
