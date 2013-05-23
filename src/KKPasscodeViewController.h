@@ -60,6 +60,7 @@ typedef NSUInteger KKPasscodeMode;
 
 - (void)didPasscodeEnteredCorrectly:(KKPasscodeViewController*)viewController;
 - (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController;
+- (void)shouldLockApplication:(KKPasscodeViewController*)viewController;
 - (void)shouldEraseApplicationData:(KKPasscodeViewController*)viewController;
 - (void)didSettingsChanged:(KKPasscodeViewController*)viewController;
 
@@ -74,9 +75,6 @@ typedef NSUInteger KKPasscodeMode;
 	UILabel* _passcodeConfirmationWarningLabel;
 	UIView* _failedAttemptsView;
 	UILabel* _failedAttemptsLabel;
-    
-    // failed attements coutner
-	NSInteger _failedAttemptsCount;
 	
     // the current panel that being displayed
 	NSUInteger _currentPanel;
