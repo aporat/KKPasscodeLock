@@ -27,6 +27,51 @@
 @synthesize delegate = _delegate;
 
 #pragma mark -
+#pragma mark Properties
+
+- (void)setPasscodeViewControllerClass:(Class)passcodeViewControllerClass
+{
+    if ([passcodeViewControllerClass isSubclassOfClass:[KKPasscodeViewController class]]) {
+        _passcodeViewControllerClass = passcodeViewControllerClass;
+    }
+}
+
+#pragma mark -
+#pragma mark Initialization
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:style]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.passcodeViewControllerClass = [KKPasscodeViewController class];
+    }
+    return self;
+}
+
+#pragma mark -
 #pragma mark UIViewController methods
 
 - (void)viewDidLoad
@@ -161,9 +206,9 @@
 #else
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
 #endif
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             if (!_passcodeLockOn) {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.textColor = [UIColor grayColor];
             }
             
@@ -190,8 +235,8 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 	if (indexPath.section == 0 && indexPath.row == 0) {
-		KKPasscodeViewController* vc = [[KKPasscodeViewController alloc] initWithNibName:nil
-                                                                                  bundle:nil];
+		KKPasscodeViewController* vc = [[self.passcodeViewControllerClass alloc] initWithNibName:nil
+                                                                                          bundle:nil];
 		vc.delegate = self;
 		
 		if (_passcodeLockOn) {
@@ -223,7 +268,7 @@
 #endif
 		
 	} else if (indexPath.section == 0 && indexPath.row == 1 && _passcodeLockOn) {
-		KKPasscodeViewController *vc = [[KKPasscodeViewController alloc] initWithNibName:nil bundle:nil];
+		KKPasscodeViewController *vc = [[self.passcodeViewControllerClass alloc] initWithNibName:nil bundle:nil];
 		vc.delegate = self;
 		
 		vc.mode = KKPasscodeModeChange;
@@ -249,7 +294,36 @@
 #else
         [self.navigationController presentViewController:nav animated:YES completion:nil];
 #endif
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)didPasscodeEnteredCorrectly:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didPasscodeEnteredCorrectly:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didPasscodeEnteredCorrectly:) withObject:viewController];
+	}
+}
+
+- (void)didPasscodeEnteredIncorrectly:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didPasscodeEnteredIncorrectly:) withObject:viewController];
+	}
+}
+
+- (void)shouldLockApplication:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(shouldLockApplication:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(shouldLockApplication:) withObject:viewController];
+	}
+}
+
+- (void)shouldEraseApplicationData:(KKPasscodeViewController*)viewController
+{
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(shouldEraseApplicationData:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(shouldEraseApplicationData:) withObject:viewController];
 	}
 }
 
@@ -264,7 +338,10 @@
 	if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
 		[_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
 	}
-	
+
+    if ([_passcodeViewControllerDelegate respondsToSelector:@selector(didSettingsChanged:)]) {
+		[_passcodeViewControllerDelegate performSelector:@selector(didSettingsChanged:) withObject:viewController];
+	}
 }
 
 
