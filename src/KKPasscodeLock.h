@@ -20,6 +20,7 @@
 #import <Foundation/Foundation.h>
 #import "KKPasscodeViewController.h"
 
+extern CGFloat const kPasscodeBlockDisabled;
 
 @interface KKPasscodeLock : NSObject {
     
@@ -28,6 +29,9 @@
     
     // how many attemepts is user is allowed to have before the screen is locked
 	NSUInteger _attemptsAllowed;
+    
+    // the minimum time interval (in seconds) that has to pass before isPasscodeBlocked return FALSE again
+    NSTimeInterval _passcodeBlockInterval;
 }
 
 /**
@@ -41,6 +45,16 @@
 - (BOOL)isPasscodeRequired;
 
 /**
+ * checks if the passcode has been blocked due to too many failed attempts
+ */
+- (BOOL)isPasscodeBlocked;
+
+/**
+ * return an interval <= 0 if the passcode is not blocked or a value > 0 indicating the time remaining until the passcode can be unlocked
+ */
+- (NSTimeInterval)passcodeBlockedRemainingTime;
+
+/**
  * returns a localized string from the framework's bundle
  */
 - (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value NS_FORMAT_ARGUMENT(1);
@@ -50,8 +64,17 @@
  */
 - (void)setDefaultSettings;
 
+/**
+ * reset the passcode settings
+ */
+- (void)resetSettings;
+
 @property (nonatomic,assign) BOOL eraseOption;
 
 @property (nonatomic,assign) NSUInteger attemptsAllowed;
+
+@property (nonatomic,assign) NSTimeInterval passcodeBlockInterval;
+
+@property (nonatomic, strong, readonly) NSDateFormatter *dateFormatter;
 
 @end
