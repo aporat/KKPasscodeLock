@@ -200,7 +200,10 @@
 			vc.mode = KKPasscodeModeSet;
 		}
 		
-		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        UINavigationController *nav = [[UINavigationController alloc]
+                                       initWithNavigationBarClass:[self.navigationController.navigationBar class]
+                                       toolbarClass:[self.navigationController.toolbar class]];
+        nav.viewControllers = @[vc];
         
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			nav.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -225,8 +228,10 @@
 		
 		vc.mode = KKPasscodeModeChange;
 		
-		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-		
+        UINavigationController *nav = [[UINavigationController alloc]
+                                       initWithNavigationBarClass:[self.navigationController.navigationBar class]
+                                       toolbarClass:[self.navigationController.toolbar class]];
+        nav.viewControllers = @[vc];		
 		
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			nav.modalPresentationStyle = UIModalPresentationFormSheet;
