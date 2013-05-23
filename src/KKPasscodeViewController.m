@@ -26,6 +26,7 @@
 @interface KKPasscodeViewController ()
 
 @property(nonatomic,assign) BOOL isSmallLandscape;
+@property(nonatomic,strong) UIView *dimView;
 
 @end
 
@@ -49,6 +50,30 @@
 
 #pragma mark -
 #pragma mark UIViewController
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    return self;
+}
 
 - (void)loadView
 {
@@ -222,6 +247,18 @@
                                          self.view.bounds.size.width,
                                          self.view.bounds.size.height);
 		}
+        
+        if (!self.dimView) {
+            id<UIApplicationDelegate> appDelegate = [[UIApplication sharedApplication] delegate];
+            self.dimView = [[UIView alloc] initWithFrame:appDelegate.window.rootViewController.view.bounds];
+            self.dimView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            self.dimView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+            self.dimView.alpha = 0.0f;
+            [appDelegate.window.rootViewController.view addSubview:self.dimView];
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dimView.alpha = 1.0f;
+            }];
+        }
 	}
 }
 
@@ -233,6 +270,17 @@
     [_enterPasscodeTextField resignFirstResponder];
     [_setPasscodeTextField resignFirstResponder];
     [_confirmPasscodeTextField resignFirstResponder];
+    
+    if (self.dimView) {
+        [UIView animateWithDuration:0.3f
+                         animations:^{
+                             self.dimView.alpha = 0.0f;
+                         }
+                         completion:^(BOOL finished) {
+                             [self.dimView removeFromSuperview];
+                             self.dimView = nil;
+                         }];
+    }
 }
 
 
@@ -259,7 +307,12 @@
 		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
 	}
 	
-	_failedAttemptsCount += 1;
+    NSInteger _failedAttemptsCount = [[KKKeychain getStringForKey:@"failedAttemptsCount"] integerValue];
+    
+    _failedAttemptsCount++;
+    
+    [KKKeychain setString:[NSString stringWithFormat:@"%d", _failedAttemptsCount] forKey:@"failedAttemptsCount"];
+
 	if (_failedAttemptsCount == 1) {
 		_failedAttemptsLabel.text = KKPasscodeLockLocalizedString(@"1 Failed Passcode Attempt", @"");
 	} else {
@@ -291,7 +344,15 @@
 			if ([_delegate respondsToSelector:@selector(didPasscodeEnteredIncorrectly:)]) {
 				[_delegate didPasscodeEnteredIncorrectly:self];
 			}
+            
+            [KKKeychain setString:[[KKPasscodeLock sharedLock].dateFormatter stringFromDate:[NSDate date]] forKey:@"incorrect_passcode_datetime"];
+            
+            if ([_delegate respondsToSelector:@selector(shouldLockApplication:)]) {
+				[_delegate shouldLockApplication:self];
+			}
 		}
+        
+        [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
 	}
 	
 }
@@ -459,6 +520,8 @@
             if ([_delegate respondsToSelector:@selector(didPasscodeEnteredCorrectly:)]) {
                 [_delegate performSelector:@selector(didPasscodeEnteredCorrectly:) withObject:self];
             }
+            
+            [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
             [self dismissModalViewControllerAnimated:YES];
