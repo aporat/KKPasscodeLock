@@ -1,4 +1,8 @@
 <h2>What is KKPasscodeLock?</h2>
+
+![](http://cocoapod-badges.herokuapp.com/v/KKPasscodeLock/badge.png) &nbsp; ![](http://cocoapod-badges.herokuapp.com/p/KKPasscodeLock/badge.png)
+
+
 KKPasscodeLock is an iOS toolkit for adding a passcode view controller and passcode settings in  ios apps.
 
 ![](https://github.com/aporat/KKPasscodeLock/raw/master/screenshots/iphone-1.png) 
