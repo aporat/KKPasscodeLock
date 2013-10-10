@@ -289,7 +289,7 @@
 
 - (UIImage *)boxEmpty
 {
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+    if (floor(NSFoundationVersionNumber) > 993.00) {
         return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty_ios7"];
     } else {
         return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty"];
@@ -298,7 +298,7 @@
 
 - (UIImage *)boxFilled
 {
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+    if (floor(NSFoundationVersionNumber) > 993.00) {
         return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_filled_ios7"];
     } else {
         return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_filled"];
