@@ -392,8 +392,8 @@
 	
 	[UIView beginAnimations:@"" context:nil];
 	[UIView setAnimationDuration:0.25];
-	oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
-	newTableView.frame = self.view.frame;
+	newTableView.frame = oldTableView.frame;
+    oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
 	[UIView commitAnimations];
 	
 	_shouldReleaseFirstResponser = YES;
@@ -417,8 +417,8 @@
 	
 	[UIView beginAnimations:@"" context:nil];
 	[UIView setAnimationDuration:0.25];
+    newTableView.frame = oldTableView.frame;
 	oldTableView.frame = CGRectMake(oldTableView.frame.origin.x + self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
-	newTableView.frame = self.view.frame;
 	[UIView commitAnimations];
 	
     _shouldReleaseFirstResponser = YES;
@@ -471,10 +471,10 @@
 				if ([passcode isEqualToString:_setPasscodeTextField.text]) {
 					_setPasscodeTextField.text = @"";
 					_passcodeConfirmationWarningLabel.text = KKPasscodeLockLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"");
-					_passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
+					_passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 132.0, self.view.bounds.size.width - 10.0, 60.0);
 				} else {
 					_passcodeConfirmationWarningLabel.text = @"";
-					_passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 146.0, self.view.bounds.size.width, 30.0);
+					_passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 146.0, self.view.bounds.size.width - 10.0, 30.0);
 					[self moveToNextTableView];
 				}
 			} else if ([textField isEqual:_confirmPasscodeTextField]) {
@@ -563,10 +563,10 @@
                     [[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[self boxEmpty]];
                 }
                 _passcodeConfirmationWarningLabel.text = KKPasscodeLockLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"");
-                _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
+                _passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 132.0, self.view.bounds.size.width - 10.0, 60.0);
             } else {
                 _passcodeConfirmationWarningLabel.text = @"";
-                _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 146.0, self.view.bounds.size.width, 30.0);
+                _passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 146.0, self.view.bounds.size.width - 10.0, 30.0);
                 [self moveToNextTableView];
             }
         } else if ([textField isEqual:_confirmPasscodeTextField]) {
@@ -640,8 +640,11 @@
 #endif
     
 	headerLabel.font = [UIFont boldSystemFontOfSize:self.isSmallLandscape ? 12.0f : 17.0f];
-	headerLabel.shadowOffset = CGSizeMake(0, 1.0);
-	headerLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+	
+    if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+        headerLabel.shadowOffset = CGSizeMake(0, 1.0);
+        headerLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    }
 	
 	if ([textField isEqual:_setPasscodeTextField]) {
 		_passcodeConfirmationWarningLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, self.isSmallLandscape ? 73.0f : 146.0, self.view.bounds.size.width, 30.0)];
@@ -655,8 +658,10 @@
 #endif
 
 		_passcodeConfirmationWarningLabel.font = [UIFont systemFontOfSize:14.0];
-		_passcodeConfirmationWarningLabel.shadowOffset = CGSizeMake(0, 1.0);
-		_passcodeConfirmationWarningLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+            _passcodeConfirmationWarningLabel.shadowOffset = CGSizeMake(0, 1.0);
+            _passcodeConfirmationWarningLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        }
 		_passcodeConfirmationWarningLabel.text = @"";
 		_passcodeConfirmationWarningLabel.numberOfLines = 0;
         
@@ -682,10 +687,11 @@
 #else
 		_failedAttemptsLabel.textAlignment = NSTextAlignmentCenter;
 #endif
-        
-		_failedAttemptsLabel.shadowOffset = CGSizeMake(0, -1.0);
-		_failedAttemptsLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-		_failedAttemptsView.layer.cornerRadius = self.isSmallLandscape ? 7.0f : 14.0f;
+        if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+            _failedAttemptsLabel.shadowOffset = CGSizeMake(0, -1.0);
+            _failedAttemptsLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        }
+        _failedAttemptsView.layer.cornerRadius = self.isSmallLandscape ? 7.0f : 14.0f;
 		_failedAttemptsView.layer.borderWidth = 1.0;
 		_failedAttemptsView.layer.borderColor = [[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25] CGColor];
 		
