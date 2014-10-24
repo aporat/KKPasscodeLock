@@ -110,13 +110,10 @@
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == 0) {
-		_eraseDataOn = YES;
-		[KKKeychain setString:@"YES" forKey:@"erase_data_on"];
+        [self enableEraseDataHandler];
 	} else {
-		_eraseDataOn = NO;
-		[KKKeychain setString:@"NO" forKey:@"erase_data_on"];
+        [self disableEraseDataHandler];
 	}
-	[_eraseDataSwitch setOn:_eraseDataOn animated:YES];
 }
 
 - (void)eraseDataSwitchChanged:(id)sender
@@ -124,12 +121,44 @@
 	if (_eraseDataSwitch.on) {
 		NSString* title = [NSString stringWithFormat:KKPasscodeLockLocalizedString(@"All data in this app will be erased after %d failed passcode attempts.", @""), [[KKPasscodeLock sharedLock] attemptsAllowed]];
 		
-		UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:KKPasscodeLockLocalizedString(@"Cancel", @"") destructiveButtonTitle:KKPasscodeLockLocalizedString(@"Enable", @"") otherButtonTitles:nil];
-		[sheet showInView:self.view];
+        if ((floor(NSFoundationVersionNumber) <= 1047.25)) {
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:KKPasscodeLockLocalizedString(@"Cancel", @"") destructiveButtonTitle:KKPasscodeLockLocalizedString(@"Enable", @"") otherButtonTitles:nil];
+            [sheet showInView:self.view];
+        } else {
+         
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                                     message:nil
+                                                                              preferredStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UIAlertControllerStyleAlert : UIAlertControllerStyleActionSheet];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:KKPasscodeLockLocalizedString(@"Enable", @"") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                [self enableEraseDataHandler];
+            }]];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:KKPasscodeLockLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                [self disableEraseDataHandler];
+            }]];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+		
 	} else {
 		_eraseDataOn = NO;
 		[KKKeychain setString:@"NO" forKey:@"erase_data_on"];
 	}
+}
+
+- (void)enableEraseDataHandler
+{
+    _eraseDataOn = YES;
+    [KKKeychain setString:@"YES" forKey:@"erase_data_on"];
+    [_eraseDataSwitch setOn:_eraseDataOn animated:YES];
+}
+
+- (void)disableEraseDataHandler
+{
+    _eraseDataOn = NO;
+    [KKKeychain setString:@"NO" forKey:@"erase_data_on"];
+    [_eraseDataSwitch setOn:_eraseDataOn animated:YES];
 }
 
 #pragma mark -
