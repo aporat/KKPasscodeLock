@@ -283,10 +283,37 @@
     }
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    CGRect frame = _passcodeConfirmationWarningLabel.frame;
+    frame.origin.x = 10.0f;
+    frame.size.width = self.view.frame.size.width - 10.0f*2;
+    
+    _passcodeConfirmationWarningLabel.frame = frame;
+}
 
 #pragma mark -
 #pragma mark Private methods
 
+- (UIImage *)boxEmpty
+{
+    if (floor(NSFoundationVersionNumber) > 993.00) {
+        return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty_ios7"];
+    } else {
+        return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty"];
+    }
+}
+
+- (UIImage *)boxFilled
+{
+    if (floor(NSFoundationVersionNumber) > 993.00) {
+        return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_filled_ios7"];
+    } else {
+        return [UIImage imageNamed:@"KKPasscodeLock.bundle/box_filled"];
+    }
+}
 
 - (void)cancelButtonPressed:(id)sender
 {
@@ -304,14 +331,14 @@
     
 	_enterPasscodeTextField.text = @"";
 	for (int i = 0; i < kPasscodeBoxesCount; i++) {
-		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
+		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[self boxEmpty]];
 	}
 	
     NSInteger _failedAttemptsCount = [[KKKeychain getStringForKey:@"failedAttemptsCount"] integerValue];
     
     _failedAttemptsCount++;
     
-    [KKKeychain setString:[NSString stringWithFormat:@"%d", _failedAttemptsCount] forKey:@"failedAttemptsCount"];
+    [KKKeychain setString:[NSString stringWithFormat:@"%ld", (long)_failedAttemptsCount] forKey:@"failedAttemptsCount"];
 
 	if (_failedAttemptsCount == 1) {
 		_failedAttemptsLabel.text = KKPasscodeLockLocalizedString(@"1 Failed Passcode Attempt", @"");
@@ -370,13 +397,13 @@
                                     oldTableView.frame.size.height);
 	
 	for (int i = 0; i < kPasscodeBoxesCount; i++) {
-		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
+		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[self boxEmpty]];
 	}
 	
 	[UIView beginAnimations:@"" context:nil];
 	[UIView setAnimationDuration:0.25];
-	oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
-	newTableView.frame = self.view.frame;
+	newTableView.frame = oldTableView.frame;
+    oldTableView.frame = CGRectMake(oldTableView.frame.origin.x - self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
 	[UIView commitAnimations];
 	
 	_shouldReleaseFirstResponser = YES;
@@ -395,13 +422,13 @@
 	newTableView.frame = CGRectMake(oldTableView.frame.origin.x - self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
 	
 	for (int i = 0; i < kPasscodeBoxesCount; i++) {
-		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
+		[[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[self boxEmpty]];
 	}
 	
 	[UIView beginAnimations:@"" context:nil];
 	[UIView setAnimationDuration:0.25];
+    newTableView.frame = oldTableView.frame;
 	oldTableView.frame = CGRectMake(oldTableView.frame.origin.x + self.view.bounds.size.width, oldTableView.frame.origin.y, oldTableView.frame.size.width, oldTableView.frame.size.height);
-	newTableView.frame = self.view.frame;
 	[UIView commitAnimations];
 	
     _shouldReleaseFirstResponser = YES;
@@ -454,10 +481,10 @@
 				if ([passcode isEqualToString:_setPasscodeTextField.text]) {
 					_setPasscodeTextField.text = @"";
 					_passcodeConfirmationWarningLabel.text = KKPasscodeLockLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"");
-					_passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
+					_passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 132.0, self.view.bounds.size.width - 10.0*2, 60.0);
 				} else {
 					_passcodeConfirmationWarningLabel.text = @"";
-					_passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 146.0, self.view.bounds.size.width, 30.0);
+					_passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 146.0, self.view.bounds.size.width - 10.0*2, 30.0);
 					[self moveToNextTableView];
 				}
 			} else if ([textField isEqual:_confirmPasscodeTextField]) {
@@ -494,6 +521,8 @@
             if ([KKKeychain setString:@"NO" forKey:@"passcode_on"]) {
                 [KKKeychain setString:@"" forKey:@"passcode"];
             }
+            
+            [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
             
             if ([_delegate respondsToSelector:@selector(didSettingsChanged:)]) {
                 [_delegate performSelector:@selector(didSettingsChanged:) withObject:self];
@@ -535,6 +564,7 @@
         NSString *passcode = [KKKeychain getStringForKey:@"passcode"];
         if ([textField isEqual:_enterPasscodeTextField]) {
             if ([passcode isEqualToString:_enterPasscodeTextField.text]) {
+                [KKKeychain setString:@"0" forKey:@"failedAttemptsCount"];
                 [self moveToNextTableView];
             } else {
                 [self incrementFailedAttemptsLabel];
@@ -543,13 +573,13 @@
             if ([passcode isEqualToString:_setPasscodeTextField.text]) {
                 _setPasscodeTextField.text = @"";
                 for (int i = 0; i < kPasscodeBoxesCount; i++) {
-                    [[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
+                    [[[_boxes objectAtIndex:_currentPanel] objectAtIndex:i] setImage:[self boxEmpty]];
                 }
                 _passcodeConfirmationWarningLabel.text = KKPasscodeLockLocalizedString(@"Enter a different passcode. You cannot re-use the same passcode.", @"");
-                _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 132.0, self.view.bounds.size.width, 60.0);
+                _passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 132.0, self.view.bounds.size.width - 10.0*2, 60.0);
             } else {
                 _passcodeConfirmationWarningLabel.text = @"";
-                _passcodeConfirmationWarningLabel.frame = CGRectMake(0.0, 146.0, self.view.bounds.size.width, 30.0);
+                _passcodeConfirmationWarningLabel.frame = CGRectMake(10.0, 146.0, self.view.bounds.size.width - 10.0*2, 30.0);
                 [self moveToNextTableView];
             }
         } else if ([textField isEqual:_confirmPasscodeTextField]) {
@@ -623,11 +653,14 @@
 #endif
     
 	headerLabel.font = [UIFont boldSystemFontOfSize:self.isSmallLandscape ? 12.0f : 17.0f];
-	headerLabel.shadowOffset = CGSizeMake(0, 1.0);
-	headerLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+	
+    if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+        headerLabel.shadowOffset = CGSizeMake(0, 1.0);
+        headerLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    }
 	
 	if ([textField isEqual:_setPasscodeTextField]) {
-		_passcodeConfirmationWarningLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, self.isSmallLandscape ? 73.0f : 146.0, self.view.bounds.size.width, 30.0)];
+		_passcodeConfirmationWarningLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, self.isSmallLandscape ? 73.0f : 146.0, self.view.frame.size.width - 10.0*2, 30.0)];
 		_passcodeConfirmationWarningLabel.textColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.4 alpha:1.0];
 		_passcodeConfirmationWarningLabel.backgroundColor = [UIColor clearColor];
         
@@ -638,8 +671,10 @@
 #endif
 
 		_passcodeConfirmationWarningLabel.font = [UIFont systemFontOfSize:14.0];
-		_passcodeConfirmationWarningLabel.shadowOffset = CGSizeMake(0, 1.0);
-		_passcodeConfirmationWarningLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+            _passcodeConfirmationWarningLabel.shadowOffset = CGSizeMake(0, 1.0);
+            _passcodeConfirmationWarningLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        }
 		_passcodeConfirmationWarningLabel.text = @"";
 		_passcodeConfirmationWarningLabel.numberOfLines = 0;
         
@@ -665,10 +700,11 @@
 #else
 		_failedAttemptsLabel.textAlignment = NSTextAlignmentCenter;
 #endif
-        
-		_failedAttemptsLabel.shadowOffset = CGSizeMake(0, -1.0);
-		_failedAttemptsLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-		_failedAttemptsView.layer.cornerRadius = self.isSmallLandscape ? 7.0f : 14.0f;
+        if ((floor(NSFoundationVersionNumber) <= 993.00)) {
+            _failedAttemptsLabel.shadowOffset = CGSizeMake(0, -1.0);
+            _failedAttemptsLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        }
+        _failedAttemptsView.layer.cornerRadius = self.isSmallLandscape ? 7.0f : 14.0f;
 		_failedAttemptsView.layer.borderWidth = 1.0;
 		_failedAttemptsView.layer.borderColor = [[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25] CGColor];
 		
@@ -720,7 +756,7 @@
     CGFloat height = self.isSmallLandscape ? kPasscodeBoxHeight * 0.6f : kPasscodeBoxHeight;
 	
 	for (int i = 0; i < kPasscodeBoxesCount; i++) {
-		UIImageView *square = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"]];
+		UIImageView *square = [[UIImageView alloc] initWithImage:[self boxEmpty]];
 		square.frame = CGRectMake(squareX, self.isSmallLandscape ? 32.0f : 74.0, width, height);
 		[squareViews addObject:square];
 		squareX += self.isSmallLandscape ? 42.0f : 71.0;
@@ -790,9 +826,9 @@
     for (int i = 0; i < kPasscodeBoxesCount; i++) {
         UIImageView *square = [[_boxes objectAtIndex:_currentPanel] objectAtIndex:i];
         if (i < [result length]) {
-            square.image = [UIImage imageNamed:@"KKPasscodeLock.bundle/box_filled.png"];
+            square.image = [self boxFilled];
         } else {
-            square.image = [UIImage imageNamed:@"KKPasscodeLock.bundle/box_empty.png"];
+            square.image = [self boxEmpty];
         }
     }
     
